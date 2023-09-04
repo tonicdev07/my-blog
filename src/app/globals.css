@@ -1,0 +1,231 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.box-effect {
+  background: rgba(97, 95, 95, 0.153);
+  border-radius: 16px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(106, 104, 104, 0.3) 0px 8px 16px -8px;  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+@layer components {
+  .button {
+    @apply border px-5 md:px-10 py-2.5 rounded font-semibold transition duration-200 ease-out;
+  }
+}
+@layer base {
+  body {
+    @apply dark:bg-[#0e1217] bg-white text-[#525866]  dark:text-[#cbd5f0] text-[15px];
+  }
+  *,
+  ::before,
+  ::after {
+    @apply dark:border-gray-700 border-[#838a9a];
+  }
+}
+
+@layer utilities {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+/* Child elementlar yashirilgan holda */
+.parent-menu .child {
+  opacity: 0;
+}
+.parent-menu:hover .child {
+  opacity: 1;
+}
+
+.bg-fill .avatar-img {
+  bottom: -60px;
+}
+.bg-fill:hover .avatar-img {
+  bottom: 0px;
+}
+
+
+.animation{
+  animation-name: identifier;
+  opacity: 0;
+  position: absolute;
+}
+
+@keyframes identifier {
+  from {
+    position: static;
+  }
+  to {
+    opacity: 1;
+    position: absolute;
+  }
+}
+
+/* Parent elementga hover qilganda child elementlarni ko'rsatish */
+
+
+button {
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.error-msg {
+  color: hsl(0, 100%, 67%);
+}
+
+.comments-title {
+  margin-bottom: 0.5rem;
+}
+
+.comment-form-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.message-input {
+  flex-grow: 1;
+  resize: none;
+  height: 120px;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  font-size: inherit;
+  font-family: inherit;
+  border: 1px solid hsl(235, 50%, 74%);
+  line-height: 1.4;
+}
+
+.message-input:focus {
+  border-color: hsl(235, 100%, 67%);
+  outline: none;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.comment-stack {
+  margin: 0.5rem 0;
+}
+
+.comment-stack:last-child {
+  margin-bottom: 0;
+}
+
+.nested-comments {
+  padding-left: 0.5rem;
+  flex-grow: 1;
+}
+
+.nested-comments-stack {
+  display: flex;
+}
+
+.collapse-line {
+  border: none;
+  background: none;
+  padding: 0;
+  width: 15px;
+  margin-top: 0.5rem;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  transform: translateX(-50%);
+}
+
+.collapse-line:hover::before,
+.collapse-line:focus-visible::before {
+  background-color: hsl(235, 100%, 60%);
+}
+
+.collapse-line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-color: hsl(235, 50%, 74%);
+  transition: background-color 100ms ease-in-out;
+}
+
+.hide {
+  display: none;
+  transition: all ease 1s;
+}
+
+.btn {
+  --hue: 235;
+  --color: hsl(var(--hue), 100%, 67%);
+  padding: 0.5em 1em;
+  background: var(--color);
+  border: none;
+  color: white;
+  border-radius: 0.5em;
+  font-size: 0.75em;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  --color: hsl(var(--hue), 100%, 74%);
+}
+
+.btn.icon-btn {
+  background: none;
+  color: var(--color);
+  padding: 0.25em;
+  display: flex;
+  align-items: center;
+}
+
+.mr-1 {
+  margin-right: 0.25em;
+}
+
+.icon-btn:hover,
+.icon-btn:focus-visible {
+  --color: hsl(var(--hue), 100%, 74%);
+}
+
+.icon-btn-active,
+.icon-btn.danger {
+  --hue: 0;
+}
+
+.icon-btn-active {
+  position: relative;
+}
+
+.icon-btn-active::before {
+  content: "\00D7";
+  position: absolute;
+  font-size: 0.75em;
+  width: 1em;
+  height: 1em;
+  color: white;
+  background-color: var(--color);
+  border-radius: 50%;
+  bottom: 0.1em;
+  right: 0.1em;
+}
+
+.ml-3 {
+  margin-left: 1.5rem;
+}
+
+.btn[disabled] {
+  --color: hsl(var(--hue), 20%, 74%);
+}
