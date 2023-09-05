@@ -8,10 +8,10 @@ import { createComment } from "@/services/comments"
 
 
 export default function Post() {
-  const { post, rootComments, createLocalComment } = usePost()
+  const { post, rootComments, createLocalComment } = usePost() as any
   const { loading, error, execute: createCommentFn } = useAsyncFn(createComment)
 
-  function onCommentCreate(message) {
+  function onCommentCreate(message: any) {
     return createCommentFn({ postId: post.id, message }).then(
       createLocalComment
     )
