@@ -67,7 +67,7 @@ export async function GET(
     })
     .then(async (post: any) => {
       const postId = params.id;
-      const userId = decoded.id;
+      const userId = decoded?.id;
 
       const comLikes = await prisma.commentLike.findMany({
         where: {

@@ -3,6 +3,6 @@
 import { usePost } from "@/context/context";
 
 export function useUser() {
-  const { session } = usePost();  
+  const { session } = usePost() as any;  
   return { id:session?.user?.id };
 }

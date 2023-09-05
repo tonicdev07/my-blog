@@ -8,10 +8,16 @@ export function CommentForm({
   onSubmit,
   autoFocus = false,
   initialValue = "",
+}: {
+  loading: any;
+  error: any;
+  onSubmit: any;
+  autoFocus?: boolean | undefined;
+  initialValue?: string | undefined;
 }) {
   const [message, setMessage] = useState(initialValue);
 
-  function handleSubmit(e) {
+  function handleSubmit(e: any) {
     e.preventDefault();
     onSubmit(message).then(() => setMessage(""));
   }

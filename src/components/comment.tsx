@@ -12,7 +12,7 @@ import { useUser } from "../hooks/useUser";
 import { useEffect, useState } from "react";
 import { usePost } from "@/context/context";
 import { useAsyncFn } from "@/hooks/useAsync";
-import { IconBtn } from "./iconBtn";
+import { IconBtn  } from "./iconBtn";
 import { CommentList } from "./commentList";
 
 const dateFormatter = new Intl.DateTimeFormat(undefined, {
@@ -73,7 +73,7 @@ export function Comment({
           message,
           parentId: id,
         })
-        .then((comment) => {
+        .then((comment: any) => {
           setIsReplying(false);
           createLocalComment(comment);
         });
@@ -88,7 +88,7 @@ export function Comment({
         message,
         id,
       })
-      .then((comment) => {
+      .then((comment: any) => {
         setIsEditing(false);
         updateLocalComment(id, comment.message);
       });

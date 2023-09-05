@@ -36,7 +36,7 @@ export async function PUT(
     select: { userId: true },
   })as any;
 
-  if (userId !== decoded.id) {
+  if (userId !== decoded?.id) {
     return new Response("You do not have permission to edit this message");
   }
 
@@ -72,7 +72,7 @@ export async function DELETE(
     select: { userId: true },
   })as any;
 
-  if (userId !== decoded.id) {
+  if (userId !== decoded?.id) {
     return new Response(
       JSON.stringify("You do not have permission to delete this message")
     );

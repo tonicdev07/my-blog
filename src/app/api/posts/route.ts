@@ -40,7 +40,7 @@ export async function GET(req: Request) {
   if (!check) {
     const decoded = verifyJwt(accessToken as string);
 
-    const userId = decoded.id;
+    const userId = decoded?.id;
     const postList = [];
 
     for (const post of posts) {

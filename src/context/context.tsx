@@ -29,7 +29,7 @@ export function PostProvider({
   async function getPosts(): Promise<any> {
     try {
       const url = `/api/posts/${id}`;
-      const  data  = await makeRequest(url, {
+      const data = await makeRequest(url, {
         method: "GET",
         headers: {
           authorization: session?.user.accessToken,
@@ -48,13 +48,13 @@ export function PostProvider({
     error,
   } = useQuery({ queryKey: ["post"], queryFn: getPosts, enabled: false });
 
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<string[]>([]);
 
   const commentsByParentId = useMemo(() => {
     const group: any = {};
     comments.forEach((comment) => {
-      group[comment.parentId] ||= [];
-      group[comment.parentId].push(comment);
+      group[comment.parentId as string] ||= [];
+      group[comment.parentId as string].push(comment);
     });
     return group;
   }, [comments]);
@@ -78,8 +78,8 @@ export function PostProvider({
   }
 
   function updateLocalComment(id: string, message: string) {
-    setComments((prevComments) => {
-      return prevComments.map((comment) => {
+    setComments((prevComments: any) => {
+      return prevComments.map((comment: any) => {
         if (comment.id === id) {
           return { ...comment, message };
         } else {
@@ -95,7 +95,7 @@ export function PostProvider({
 
   function toggleLocalCommentLike(id: string, addLike: boolean) {
     setComments((prevComments) => {
-      return prevComments.map((comment) => {
+      return prevComments.map((comment: any) => {
         if (id === comment.id) {
           if (addLike) {
             return {
@@ -121,7 +121,7 @@ export function PostProvider({
     <Context.Provider
       value={{
         post: { id, ...post },
-        rootComments: commentsByParentId['null'],
+        rootComments: commentsByParentId["null"],
         getReplies,
         createLocalComment,
         updateLocalComment,
