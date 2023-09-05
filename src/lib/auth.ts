@@ -1,6 +1,5 @@
 import { makeRequest } from "@/services/makeRequest";
-import logger from "@/utils/logger";
-import axios from "axios";
+import { custom } from 'openid-client';
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import FacebookProvider from "next-auth/providers/facebook";
@@ -15,6 +14,11 @@ interface GoogleData {
   email: string;
   picture: string;
 }
+
+custom.setHttpOptionsDefaults({
+  timeout: 5000,
+});
+
 export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
@@ -66,6 +70,7 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
+
       if (profile !== undefined) {
         const dataProfile = profile as GoogleData;
         const response = await makeRequest("/api/auth/userExists", {
@@ -97,7 +102,6 @@ export const authOptions: NextAuthOptions = {
       }
     },
     async jwt({ token, user, profile }) {
-      logger.info(user);
       return { ...token, ...user };
     },
     async session({ session, token }) {
@@ -113,7 +117,7 @@ export const authOptions: NextAuthOptions = {
       };
       const data = await response();
 
-      session.user = data === null ? token : (data as any);
+      session.user =  token 
       return session;
     },
   },

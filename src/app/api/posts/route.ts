@@ -24,7 +24,16 @@ export async function GET(req: Request) {
           imageUrl: true,
         },
       },
-      _count: { select: { likes: true, comments: true } },
+      likes: {
+        select: {
+          id: true,
+        },
+      },
+      comments: {
+        select: {
+          id: true,
+        },
+      },
     },
   });
 
@@ -44,14 +53,14 @@ export async function GET(req: Request) {
       if (like) {
         const modifiedPost = {
           ...post,
-          likeCount: post._count.likes,
+          likeCount: post.likes.length,
           likedByMe: true,
         };
         postList.push(modifiedPost);
       } else {
         const modifiedPost = {
           ...post,
-          likeCount: post._count.likes,
+          likeCount: post.likes.length,
           likedByMe: null,
         };
         postList.push(modifiedPost);
@@ -62,7 +71,7 @@ export async function GET(req: Request) {
 
   const getPosts = posts.map((post) => ({
     ...post,
-    likeCount: post._count.likes,
+    likeCount: post.likes.length,
     likedByMe: null,
   }));
 

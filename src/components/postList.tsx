@@ -21,7 +21,7 @@ interface Post {
   likedByMe: boolean | null;
   title: string;
   uploaded: string;
-  _count: { likes: number; comments: number };
+  comments: string;
 }
 
 const roboto = Courgette({
@@ -125,7 +125,7 @@ const PostList = () => {
                   onClick={() => pushCheck(post.id)}
                 >
                   <div
-                    className={`${title.className} px-2 mt-3 leading-6 text-xl font-semibold break-words dark:text-white text-black`}
+                    className={`${title.className} px-2 mt-3 leading-6 text-xl h-16 font-semibold break-words dark:text-white text-black`}
                   >
                     {post.title}
                   </div>
@@ -176,7 +176,7 @@ const PostList = () => {
                     >
                       <AiOutlineComment className=" w-10 font-semibold hover:text-green-600 text-2xl hover:text-3xl duration-300  cursor-pointer  " />
                     </div>
-                    <span className=" leading-6">{post._count.comments}</span>
+                    <span className=" leading-6">{post?.comments?.length}</span>
                   </div>
                   <Link href={"#"}>
                     <BsShare className=" w-10 font-semibold hover:text-purple-700 text-lg hover:text-2xl duration-300  cursor-pointer  " />

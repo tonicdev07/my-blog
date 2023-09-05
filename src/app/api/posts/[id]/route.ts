@@ -41,14 +41,14 @@ export async function GET(
         body: true,
         title: true,
         uploaded: true,
-        _count: { select: { likes: true } },
+        likes: { select: { id: true } },
         comments: {
           orderBy: {
             createdAt: "desc",
           },
           select: {
             ...COMMENT_SELECT_FIELDS,
-            _count: { select: { likes: true } },
+            likes: { select: { id: true } },
           },
         },
         images: {
@@ -82,22 +82,19 @@ export async function GET(
       return {
         ...post,
         comments: post.comments.map((comment) => {
-          const { _count, ...commentFields } = comment;
+          const { likes, ...commentFields } = comment;
           return {
             ...commentFields,
             likedByMe: comLikes.find((like) => like.commentId === comment.id),
-            likeCount: _count.likes,
+            likeCount: likes.length,
           };
         }),
         like: {
           likedByMe: postLike?.userId === userId,
-          likeCount: post?._count.likes,
+          likeCount: post?.likes.length,
         },
       };
-    });
-
-    logger.info("getPost");
-    
+    });    
 
   return new Response(JSON.stringify(getPost));
 }

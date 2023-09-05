@@ -69,7 +69,7 @@ export default function Post() {
                     };
                     const formattedDate = date.toLocaleDateString(
                       "en-US",
-                      options
+                      options as any
                     );
                     // Soat, daqiqa va soniyalarni olish
                     var hours = date.getHours().toString().padStart(2, "0");

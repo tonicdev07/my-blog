@@ -38,7 +38,7 @@ export default function Register() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
+      data: JSON.stringify({
         firstName: body.firstName,
         lastName: body.lastName,
         email: body.email,

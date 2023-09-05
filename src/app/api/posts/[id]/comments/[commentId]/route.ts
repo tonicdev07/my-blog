@@ -1,6 +1,5 @@
 import { verifyJwt } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
-import logger from "@/utils/logger";
 
 interface RequestBody {
   message: string;

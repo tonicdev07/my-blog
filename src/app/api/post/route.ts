@@ -1,5 +1,6 @@
 import { signJwtAccessToken, verifyJwt } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
+import logger from "@/utils/logger";
 
 interface RequestBody {
   body: string;
@@ -11,7 +12,6 @@ interface RequestBody {
 export async function POST(req: Request) {
   const accessToken = req.headers.get("authorization");
   const body: RequestBody = await req.json();
-
   if (!accessToken || !verifyJwt(accessToken) || !process.env.SECRET_KEY) {
     return new Response(
       JSON.stringify({
@@ -23,19 +23,19 @@ export async function POST(req: Request) {
     );
   }
 
-  const tags = body.tags.map(tag => ({ name: tag.name }));
+  const tags = body.tags.map((tag) => ({ name: tag.name }));
 
   const existingTags = await prisma.tag.findMany({
     where: { OR: tags },
     select: { id: true },
   });
-  
-  const tagsToConnect = existingTags.map(tag => ({ id: tag.id }));
-  
-  const createNewTags = tags.filter(newTag => {
-    return !existingTags.some(existingTag => existingTag.id === newTag.id);
+
+  const tagsToConnect = existingTags.map((tag) => ({ id: tag.id }));
+
+  const createNewTags = tags.filter((newTag) => {
+    return !existingTags.some((existingTag) => existingTag.id === newTag.id);
   });
-  
+
   const createPost = await prisma.post
     .create({
       data: {
