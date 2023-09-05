@@ -52,9 +52,9 @@ export function PostProvider({
 
   const commentsByParentId = useMemo(() => {
     const group: any = {};
-    comments.forEach((comment) => {
-      group[comment.parentId as string] ||= [];
-      group[comment.parentId as string].push(comment);
+    comments.forEach((comment: any) => {
+      group[comment.parentId] ||= [];
+      group[comment.parentId].push(comment);
     });
     return group;
   }, [comments]);

@@ -1,5 +1,4 @@
 import { makeRequest } from "@/services/makeRequest";
-import { custom } from 'openid-client';
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import FacebookProvider from "next-auth/providers/facebook";
@@ -14,11 +13,6 @@ interface GoogleData {
   email: string;
   picture: string;
 }
-
-custom.setHttpOptionsDefaults({
-  timeout: 5000,
-});
-
 export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
@@ -117,7 +111,7 @@ export const authOptions: NextAuthOptions = {
       };
       const data = await response();
 
-      session.user =  token 
+      session.user = data === null ? token : (data as any);
       return session;
     },
   },
