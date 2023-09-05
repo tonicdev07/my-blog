@@ -1,6 +1,5 @@
 import prisma from "@/lib/prisma";
 import * as bcrypt from "bcrypt";
-import avatar from "../../../assets/avatar.png";
 
 interface RequestBody {
   firstName: string;
