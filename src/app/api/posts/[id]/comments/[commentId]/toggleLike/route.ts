@@ -27,7 +27,7 @@ export async function POST(
 
   const data = {
     commentId: params.commentId,
-    userId: decoded.id,
+    userId: decoded?.id,
   };
 
   const like = await prisma.commentLike.findUnique({

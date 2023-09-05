@@ -22,7 +22,7 @@ export async function POST(
 
   const data = {
     postId: params.id,
-    userId: decoded.id,
+    userId: decoded?.id,
   };
 
   const like = await prisma.postLike.findUnique({

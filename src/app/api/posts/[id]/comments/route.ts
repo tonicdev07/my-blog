@@ -29,7 +29,7 @@ export async function POST(
     .create({
       data: {
         message: body.message,
-        userId: decoded.id,
+        userId: decoded?.id,
         parentId: body.parentId,
         postId: params.id,
       },
