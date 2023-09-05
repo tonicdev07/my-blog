@@ -32,8 +32,8 @@ export async function POST(req: Request) {
 
   const tagsToConnect = existingTags.map((tag) => ({ id: tag.id }));
 
-  const createNewTags = tags.filter((newTag) => {
-    return !existingTags.some((existingTag) => existingTag.id === newTag.id);
+  const createNewTags = tags.filter((newTag: any) => {
+    return !existingTags.some((existingTag: any) => existingTag.id === newTag.id);
   });
 
   const createPost = await prisma.post

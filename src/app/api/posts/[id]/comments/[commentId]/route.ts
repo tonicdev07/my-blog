@@ -34,7 +34,7 @@ export async function PUT(
   const { userId } = await prisma.comment.findUnique({
     where: { id: params.commentId },
     select: { userId: true },
-  });
+  })as any;
 
   if (userId !== decoded.id) {
     return new Response("You do not have permission to edit this message");
@@ -70,7 +70,7 @@ export async function DELETE(
   const { userId } = await prisma.comment.findUnique({
     where: { id: params.commentId },
     select: { userId: true },
-  });
+  })as any;
 
   if (userId !== decoded.id) {
     return new Response(

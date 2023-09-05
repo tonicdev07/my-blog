@@ -19,7 +19,7 @@ const roboto = Courgette({
 export default function Post() {
   const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
-  const { session, loadingPage, post, rootComments, createLocalComment } =
+  const { session, loadingPage, post, rootComments, createLocalComment }: any =
     usePost();
   const {
     loading,
@@ -101,7 +101,7 @@ export default function Post() {
                 </div>
 
                 <div className=" ">
-                  {post?.images?.map((i) => (
+                  {post?.images?.map((i: any) => (
                     <div key={i.id}>
                       <Image
                         src={i.imageUrl}

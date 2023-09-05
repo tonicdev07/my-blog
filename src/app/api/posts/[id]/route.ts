@@ -65,14 +65,14 @@ export async function GET(
         },
       },
     })
-    .then(async (post) => {
+    .then(async (post: any) => {
       const postId = params.id;
       const userId = decoded.id;
 
       const comLikes = await prisma.commentLike.findMany({
         where: {
           userId: userId,
-          commentId: { in: post.comments.map((comment) => comment.id) },
+          commentId: { in: post.comments.map((comment: any) => comment.id) },
         },
       });
 
@@ -81,7 +81,7 @@ export async function GET(
       });
       return {
         ...post,
-        comments: post.comments.map((comment) => {
+        comments: post.comments.map((comment: any) => {
           const { likes, ...commentFields } = comment;
           return {
             ...commentFields,
