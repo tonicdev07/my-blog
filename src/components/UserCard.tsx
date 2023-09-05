@@ -6,7 +6,7 @@ type Props = {
     pagetype: string,
 }
 
-export default function Card({ user, pagetype }: Props) {
+export default function UserCard({ user, pagetype }: Props) {
 
 
     const greeting = user?.name ? (
