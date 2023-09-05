@@ -6,8 +6,9 @@
     "schema": "prisma/schema.prisma"
   },
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next dev | pino-pretty -m message -i time -c",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "export": "next export"
@@ -41,6 +42,7 @@
     "pino": "^8.15.0",
     "pino-pretty": "^10.2.0",
     "postcss": "8.4.27",
+    "postinstall": "^0.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hydration-provider": "^1.0.2",
