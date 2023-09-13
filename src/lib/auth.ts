@@ -1,5 +1,5 @@
 import { makeRequest } from "@/services/makeRequest";
-import { NextAuthOptions } from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -15,7 +15,7 @@ interface GoogleData {
   picture: string;
 }
 
-export const authOptions: NextAuthOptions = {
+export const authOptions: AuthOptions = {
   // pages: {
   //   signIn: "/login",
   // },
@@ -118,3 +118,5 @@ export const authOptions: NextAuthOptions = {
     maxAge: 60 * 60,
   },
 };
+
+export default NextAuth(authOptions);
