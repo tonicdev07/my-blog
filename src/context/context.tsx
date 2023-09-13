@@ -71,7 +71,11 @@ export function PostProvider({
 
   useEffect(() => {
     if (id !== undefined) {
-      refetch();
+      const fetchData = async () => {
+        await refetch();
+      };
+
+      fetchData();
     }
     if (post?.comments == null) return;
     setComments(post.comments);

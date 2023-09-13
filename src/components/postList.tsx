@@ -36,7 +36,7 @@ const title = Yeseva_One({
 const PostList = () => {
   const toggleCommentLikeFn = useAsyncFn(togglePostLike);
   const { session, filter } = usePost() as any;
-  
+
   const [postLike, setPostLike] = useState<Post[]>([]);
   const router = useRouter();
   function getPosts() {
@@ -64,10 +64,14 @@ const PostList = () => {
   } = useQuery({ queryKey: ["todos"], queryFn: getPosts });
 
   useEffect(() => {
-    if (posts) {
-      setPostLike(posts as any);
-    }
-    refetch();
+    const fetchData = async () => {
+      if (posts) {
+        setPostLike(posts as any);
+      }
+      await refetch();
+    };
+
+    fetchData();
   }, [posts, filter]);
 
   if (error) return <h1 className="error-msg">{error as string}</h1>;
