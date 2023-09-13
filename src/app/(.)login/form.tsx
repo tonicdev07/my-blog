@@ -120,7 +120,6 @@ export const LoginForm = () => {
                 onClick={SignGoogle}
                 role="button"
               >
-              
                 Google orqali kirish
               </a>
               <div>

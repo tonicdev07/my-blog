@@ -3,7 +3,6 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import NextAuth from "next-auth/next";
-import logger from "@/utils/logger";
 
 interface GoogleProviderTy {
   clientId: string;
@@ -49,8 +48,6 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (res) {
-          logger.info(res);
-
           return res;
         } else {
           // If you return null then an error will be displayed advising the user to check their details.
@@ -115,9 +112,10 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.SECRET_KEY,
   jwt: {
     maxAge: 60 * 60,
+    secret: process.env.SECRET_KEY,
   },
   session: {
     strategy: "jwt",
