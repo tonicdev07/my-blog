@@ -2,7 +2,6 @@ import { makeRequest } from "@/services/makeRequest";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import NextAuth from "next-auth/next";
 
 interface GoogleProviderTy {
   clientId: string;
@@ -50,7 +49,6 @@ export const authOptions: NextAuthOptions = {
         if (res) {
           return res;
         } else {
-          // If you return null then an error will be displayed advising the user to check their details.
           return null;
         }
       },
@@ -120,5 +118,3 @@ export const authOptions: NextAuthOptions = {
     maxAge: 60 * 60,
   },
 };
-
-export default NextAuth(authOptions);

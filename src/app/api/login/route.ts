@@ -1,6 +1,5 @@
 import { signJwtAccessToken } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
-import logger from "@/utils/logger";
 import * as bcrypt from "bcrypt";
 
 interface RequestBody {
