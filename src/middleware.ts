@@ -1,6 +1,7 @@
 // Ref: https://next-auth.js.org/configuration/nextjs#advanced-usage
 import { withAuth, NextRequestWithAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
+import logger from "./utils/logger";
 
 export default withAuth(
   // `withAuth` augments your `Request` with the user's token.
@@ -25,6 +26,7 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ token }) => {
+        logger.info(token)
         return !!token;
       },
     },
