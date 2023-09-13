@@ -11,7 +11,7 @@ export const ourFileRouter = {
     // Set permissions and file types for this FileRoute
     .middleware(async (req) => {
       // This code runs on your server before upload
-      const user = (await auth(req)) as any;
+      const user = (await auth(req as any));
 
       // If you throw, the user will not be able to upload
       if (!user) throw new Error("Unauthorized");
@@ -31,7 +31,7 @@ export const ourFileRouter = {
     image: { maxFileSize: "2MB", maxFileCount: 4 },
     video: { maxFileSize: "256MB", maxFileCount: 1 },
   })
-    .middleware((req) => auth(req))
+    .middleware((req) => auth(req as any))
     .onUploadComplete((data) => console.log("file", data)),
 } satisfies FileRouter;
 
