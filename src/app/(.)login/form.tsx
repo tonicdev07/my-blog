@@ -120,12 +120,7 @@ export const LoginForm = () => {
                 onClick={SignGoogle}
                 role="button"
               >
-                <img
-                  className="pr-2"
-                  src="/images/google.svg"
-                  alt=""
-                  style={{ height: "2rem" }}
-                />
+              
                 Google orqali kirish
               </a>
               {/* <a
