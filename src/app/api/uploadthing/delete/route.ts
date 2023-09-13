@@ -1,4 +1,3 @@
-import logger from "@/utils/logger";
 import { utapi } from "uploadthing/server";
 
 interface RequestBody {
