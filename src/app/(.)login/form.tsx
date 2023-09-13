@@ -30,6 +30,7 @@ export const LoginForm = () => {
         password: formValues.password,
         // callbackUrl,
       });
+      console.log(res);
 
       setLoading(false);
       if (!res?.error) {

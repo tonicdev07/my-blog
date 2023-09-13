@@ -17,9 +17,9 @@ interface GoogleData {
 }
 
 export const authOptions: NextAuthOptions = {
-  pages: {
-    signIn: "/login",
-  },
+  // pages: {
+  //   signIn: "/login",
+  // },
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -112,10 +112,8 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
   jwt: {
     maxAge: 60 * 60,
-    secret: process.env.SECRET_KEY,
   },
   session: {
     strategy: "jwt",
