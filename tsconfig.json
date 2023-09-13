@@ -14,15 +14,13 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": "./",
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "react-hydration-provider": [
-        "./node_modules/react-hydration-provider/dist/index.d.ts"
-      ],
       "@/*": ["./src/*"]
     }
   },
