@@ -1,7 +1,6 @@
 "use client";
 
 import { makeRequest } from "@/services/makeRequest";
-import axios from "axios";
 import { useParams } from "next/navigation";
 import React, {
   useContext,
@@ -16,6 +15,12 @@ const Context = createContext({});
 
 export function usePost() {
   return useContext(Context);
+}
+
+interface filterType {
+  filterLike: String;
+  filterComment: String;
+  filterTag: String;
 }
 
 export function PostProvider({
@@ -49,6 +54,11 @@ export function PostProvider({
   } = useQuery({ queryKey: ["post"], queryFn: getPosts, enabled: false });
 
   const [comments, setComments] = useState<string[]>([]);
+  const [filter, setFilter] = useState<filterType>({
+    filterComment: "",
+    filterLike: "",
+    filterTag: "",
+  });
 
   const commentsByParentId = useMemo(() => {
     const group: any = {};
@@ -130,6 +140,8 @@ export function PostProvider({
         loadingPage,
         error,
         session,
+        filter,
+        setFilter,
       }}
     >
       {children}

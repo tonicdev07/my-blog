@@ -12,7 +12,7 @@ const roboto = Lobster({
 
 const AppBar = () => {
   return (
-    <header className="flex items-center gap-4 justify-between py-2 px-3 border-b-[0.1px] shadow">
+    <header className="fixed dark:bg-[#0e1217] bg-white w-full flex z-50 items-center gap-4 justify-between py-2 px-3 border-b-[0.1px] shadow">
       <div className="flex items-center gap-3">
         <Link
           className="transition-colors items-center flex hover:text-blue-500"
@@ -27,7 +27,6 @@ const AppBar = () => {
           />
           <span className={`${roboto.className}  text-xl`}>TonicDev</span>
         </Link>
-        <Link href={"/profile"}>Profile</Link>
       </div>
       <SigninButton />
     </header>

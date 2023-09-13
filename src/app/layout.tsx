@@ -27,12 +27,7 @@ export default function RootLayout({
           <div className=" max-w-7xl mx-auto">
             <ToastContainer />
             <AppBar />
-            <div className="grid grid-cols-1 justify-items-center ">
-              <div className=" col-end-1">
-                <CustomMenu />
-              </div>
-              <div>{children}</div>
-            </div>
+            <div className=" w-full">{children}</div>
           </div>
         </Provider>
       </body>

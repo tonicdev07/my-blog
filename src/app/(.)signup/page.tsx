@@ -46,7 +46,7 @@ export default function Register() {
         username: body.username,
       }),
     })
-      .then((resoult) => {
+      .then(() => {
         toast.success("Ro'yxatdan o'tdingiz!");
         setTimeout(() => {
           router.push("/login");
@@ -82,36 +82,36 @@ export default function Register() {
                 method="post"
               >
                 <input
-                  className="p-2 placeholder:text-slate-600 w-full rounded-md"
+                  className="p-2 placeholder:text-slate-400 w-full rounded-md"
                   type="text"
-                  placeholder="First name"
+                  placeholder="Ism"
                 />
                 <input
-                  className="p-2 placeholder:text-slate-600 w-full rounded-md"
+                  className="p-2 placeholder:text-slate-400 w-full rounded-md"
                   type="text"
-                  placeholder="Last name"
+                  placeholder="Familya"
                 />
                 <input
-                  className="p-2 placeholder:text-slate-600 w-full rounded-md"
+                  className="p-2 placeholder:text-slate-400 w-full rounded-md"
                   type="email"
-                  placeholder="Email"
+                  placeholder="Elektron pochta"
                 />
                 <input
-                  className="p-2 placeholder:text-slate-600 w-full rounded-md"
+                  className="p-2 placeholder:text-slate-400 w-full rounded-md"
                   type="password"
-                  placeholder="Password"
+                  placeholder="Parol"
                 />
                 <input
-                  className="p-2 placeholder:text-slate-600 w-full rounded-md"
+                  className="p-2 placeholder:text-slate-400 w-full rounded-md"
                   type="text"
-                  placeholder="Username"
+                  placeholder="Foydalanuvchi nomi"
                 />
 
                 <button
                   type="submit"
                   className="hover:border hover:bg-white hover:text-black transition-all bg-blue-600 rounded-lg text-white border-black w-32 py-1 mx-auto"
                 >
-                  Submit
+                  Yuklash
                 </button>
               </form>
             </div>

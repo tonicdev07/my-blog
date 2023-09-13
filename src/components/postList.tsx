@@ -7,7 +7,6 @@ import { AiOutlineComment } from "react-icons/ai";
 import { Courgette, Yeseva_One } from "next/font/google";
 import { usePost } from "@/context/context";
 import { AnyObject } from "antd/es/_util/type";
-import axios from "axios";
 import { useAsyncFn } from "@/hooks/useAsync";
 import { togglePostLike } from "@/services/comments";
 import { useRouter } from "next/navigation";
@@ -36,17 +35,21 @@ const title = Yeseva_One({
 
 const PostList = () => {
   const toggleCommentLikeFn = useAsyncFn(togglePostLike);
-  const { session } = usePost() as any;
+  const { session, filter } = usePost() as any;
+  
   const [postLike, setPostLike] = useState<Post[]>([]);
   const router = useRouter();
   function getPosts() {
     try {
-      const data = makeRequest(`/api/posts?${""}`, {
-        method: "GET",
-        headers: {
-          authorization: session?.user.accessToken,
-        },
-      });
+      const data = makeRequest(
+        `/api/posts?comment=${filter.filterComment}&like=${filter.filterLike}&tag=${filter.filterTag}`,
+        {
+          method: "GET",
+          headers: {
+            authorization: session?.user.accessToken,
+          },
+        }
+      );
       return data;
     } catch (err) {
       console.log(err);
@@ -54,6 +57,7 @@ const PostList = () => {
   }
 
   const {
+    refetch,
     data: posts,
     isLoading: loading,
     error,
@@ -63,7 +67,8 @@ const PostList = () => {
     if (posts) {
       setPostLike(posts as any);
     }
-  }, [posts]);
+    refetch();
+  }, [posts, filter]);
 
   if (error) return <h1 className="error-msg">{error as string}</h1>;
 
@@ -97,6 +102,7 @@ const PostList = () => {
         });
     }
   };
+
   function pushCheck(id: string) {
     if (!session) {
       return router.push("/login");
@@ -106,7 +112,7 @@ const PostList = () => {
   }
 
   return (
-    <div className="mt-8">
+    <div className="mt-20">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* ===== box ====== */}
         {loading ? (
@@ -176,7 +182,7 @@ const PostList = () => {
                     >
                       <AiOutlineComment className=" w-10 font-semibold hover:text-green-600 text-2xl hover:text-3xl duration-300  cursor-pointer  " />
                     </div>
-                    <span className=" leading-6">{post?.comments?.length}</span>
+                    <span className=" leading-6">{post?.comments}</span>
                   </div>
                   <Link href={"#"}>
                     <BsShare className=" w-10 font-semibold hover:text-purple-700 text-lg hover:text-2xl duration-300  cursor-pointer  " />

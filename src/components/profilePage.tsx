@@ -28,7 +28,6 @@ const ProfilePage = () => {
   }, [session]);
 
   const [user, setUser] = useState<UserData>();
-  console.log(session);
 
   return (
     user && (
@@ -47,9 +46,7 @@ const ProfilePage = () => {
           </div>
           <div>
             <div className="">
-              <div className="mt-2 text-sm leading-3" >
-                Ism
-              </div>
+              <div className="mt-2 text-sm leading-3">Ism</div>
               <input
                 id="firstname"
                 className={` text-2xl mb-3 leading-[6px] text-[#525866]  dark:text-[#fff] font-semibold border border-transparent focus:outline-none w-full dark:bg-[#0e1217] bg-white  focus:border-transparent`}
@@ -63,9 +60,7 @@ const ProfilePage = () => {
                   })
                 }
               />
-              <div className=" text-sm leading-3">
-                Familya
-              </div>
+              <div className=" text-sm leading-3">Familya</div>
               <input
                 className={`text-2xl leading-7 text-[#525866]  dark:text-[#fff] font-semibold border border-transparent focus:outline-none w-full dark:bg-[#0e1217] bg-white  focus:border-transparent`}
                 type="text"
@@ -103,6 +98,7 @@ const ProfilePage = () => {
                 officia consequuntur. Quod, nam sapiente.
               </div>
             </div>
+            
           </div>
         </div>
       </div>

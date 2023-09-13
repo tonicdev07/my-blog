@@ -1,13 +1,13 @@
 "use client";
 
 import { Dialog } from "@headlessui/react";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 export const LoginForm = () => {
   const router = useRouter();
-  const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(true);
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -32,13 +32,10 @@ export const LoginForm = () => {
       });
 
       setLoading(false);
-      // setFormValues({ email: "", password: "" });
-
-      //   console.log(res);
       if (!res?.error) {
         router.push(callbackUrl);
       } else {
-        setError("invalid email or password");
+        setError("Email yoki parol xato!");
       }
     } catch (error: any) {
       setLoading(false);
@@ -47,10 +44,7 @@ export const LoginForm = () => {
   };
 
   async function SignGoogle() {
-    const result = await signIn("google");
-
-    // Check if the signIn was successful
-  
+    await signIn("google");
   }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -88,11 +82,11 @@ export const LoginForm = () => {
               <div className="mb-6">
                 <input
                   required
-                  type="email"
+                  type="text"
                   name="username"
                   value={formValues.username}
                   onChange={handleChange}
-                  placeholder="Email address"
+                  placeholder="Elektron pochta"
                   className={`${input_style}`}
                 />
               </div>
@@ -103,7 +97,7 @@ export const LoginForm = () => {
                   name="password"
                   value={formValues.password}
                   onChange={handleChange}
-                  placeholder="Password"
+                  placeholder="Parol"
                   className={`${input_style}`}
                 />
               </div>
@@ -113,11 +107,11 @@ export const LoginForm = () => {
                 className="inline-block px-7 py-4 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
                 disabled={loading}
               >
-                {loading ? "loading..." : "Sign In"}
+                {loading ? "loading..." : "Kirish"}
               </button>
 
               <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-                <p className="text-center font-semibold mx-4 mb-0">OR</p>
+                <p className="text-center font-semibold mx-4 mb-0">YOKI</p>
               </div>
 
               <a
@@ -132,9 +126,9 @@ export const LoginForm = () => {
                   alt=""
                   style={{ height: "2rem" }}
                 />
-                Continue with Google
+                Google orqali kirish
               </a>
-              <a
+              {/* <a
                 className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center"
                 style={{ backgroundColor: "#55acee" }}
                 onClick={() => signIn("facebook")}
@@ -147,7 +141,13 @@ export const LoginForm = () => {
                   style={{ height: "2.2rem" }}
                 />
                 Continue with Facebook
-              </a>
+              </a> */}
+              <div>
+                <span>Account yo'qmi? </span>
+                <Link className=" text-sm text-blue-600" href={"/signup"}>
+                  Ro'yxatdan o'tish
+                </Link>
+              </div>
             </form>
           </Dialog.Panel>
         </div>

@@ -1,6 +1,5 @@
-import { signJwtAccessToken, verifyJwt } from "@/lib/jwt";
+import { verifyJwt } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
-import logger from "@/utils/logger";
 
 interface RequestBody {
   body: string;
@@ -23,17 +22,34 @@ export async function POST(req: Request) {
     );
   }
 
-  const tags = body.tags.map((tag) => ({ name: tag.name }));
+  const tags = body.tags.map((tag) => ({ name: tag })) as any;
 
   const existingTags = await prisma.tag.findMany({
     where: { OR: tags },
-    select: { id: true },
+    select: { id: true, name: true },
   });
+  const postName = await prisma.post.findMany({
+    where: { title: body.title },
+    select: { title: true },
+  });
+
+  if (postName.length !== 0)
+    return new Response(
+      JSON.stringify({
+        error: "Nom mavjud",
+        check: false,
+      }),
+      {
+        status: 404,
+      }
+    );
 
   const tagsToConnect = existingTags.map((tag) => ({ id: tag.id }));
 
   const createNewTags = tags.filter((newTag: any) => {
-    return !existingTags.some((existingTag: any) => existingTag.id === newTag.id);
+    return !existingTags.some(
+      (existingTag: any) => existingTag.name === newTag.name
+    );
   });
 
   const createPost = await prisma.post
@@ -48,36 +64,6 @@ export async function POST(req: Request) {
         images: {
           create: {
             imageUrl: body.imageUrl,
-          },
-        },
-      },
-      select: {
-        id: true,
-        comments: {
-          select: {
-            id: true,
-            createdAt: true,
-            message: true,
-            parentId: true,
-            user: {
-              select: {
-                id: true,
-                firstName: true,
-                lastName: true,
-              },
-            },
-          },
-        },
-        tags: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
-        images: {
-          select: {
-            id: true,
-            imageUrl: true,
           },
         },
       },

@@ -2,51 +2,132 @@
 
 import React, { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
-import { AiFillEnvironment } from "react-icons/ai";
+import { CiLight, CiDark } from "react-icons/ci";
+import { MdDarkMode } from "react-icons/md";
+import { AiOutlineLike } from "react-icons/ai";
+import { LiaComment } from "react-icons/lia";
 import { Tooltip } from "antd";
 import Link from "next/link";
-import ThemeButton from "./themeButton";
+import { useTheme } from "next-themes";
+import { usePost } from "@/context/context";
 
 const CustomMenu: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const { setFilter, filter }: any = usePost();
+  const { systemTheme, theme, setTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   return (
     <div className="flex relative">
-      <div className={` fixed h-screen top-0 lg:static  z-50 lg:bg-none`}>
         <div
-          className={` border-r  min-h-screen pt-8 ${
+          className={` hidden lg:block pt-8 ${
             open ? "w-64" : "w-12 left-[-70px]"
-          } duration-300  lg:left-0 relative z-50  dark:bg-[#212a35] `}
+          } duration-300  lg:left-0 relative z-50`}
+        ></div>
+      <div className={` fixed h-screen top-0 lg:top-14  z-50 lg:bg-none`}>
+        <div
+          className={` border-r   min-h-screen pt-8 ${
+            open ? "w-64" : "w-12 left-[-70px]"
+          } duration-300  lg:left-0 relative z-50  dark:bg-[#0e1217] bg-slate-100 `}
         >
           <IoIosArrowBack
-            className={`child dark:bg-[#0e1217] bg-white dark:text-[#cbd5f0] text-2xl rounded-full absolute  lg:-right-3 top-2 dark:border-white border cursor-pointer ${
+            className={` dark:bg-[#0e1217] bg-white dark:text-[#cbd5f0] text-xl rounded-full absolute  lg:-right-3 top-2 dark:hover:border-slate-400 border cursor-pointer ${
               !open ? "-right-14 top-[70px] lg:top-2  rotate-180" : "right-2"
             } duration-1000 `}
             onClick={() => setOpen(!open)}
           />
-          <Link href={"/"} className={`${open && "flex flex-col"}  `}>
-            <div
-              className={`px-3 py-[2px] cursor-pointer ${
-                !open && "w-12"
-              }  dark:hover:bg-slate-800 hover:bg-slate-200 inline-flex  items-center`}
-            >
-              <Tooltip placement="right" title="Location" color="black">
-                <AiFillEnvironment
-                  className={` text-xl rounded cursor-pointer block float-left  duration-500 ${
-                    open && " rotate-[360deg]"
-                  }`}
-                />
-              </Tooltip>
-              <div
-                className={`origin-left ml-2 font-medium  duration-300 ${
-                  !open && "hidden"
-                }`}
+          <div className="flex flex-col h-[60vh] justify-between">
+            <div>
+              <Link href={"/"} className={`${open && "flex my-2 flex-col"}  `}>
+                <div
+                  onClick={() =>
+                    setFilter((prew: any) =>
+                      !prew.filterComment || prew.filterComment === "desc"
+                        ? { filterLike: "desc" }
+                        : { filterLike: "" }
+                    )
+                  }
+                  className={`px-3 py-[2px] cursor-pointer ${!open && "w-12"} ${
+                    filter.filterLike === "desc" &&
+                    "bg-slate-200 dark:bg-slate-700"
+                  }  dark:hover:bg-slate-700 hover:bg-slate-200 inline-flex  items-center`}
+                >
+                  <Tooltip placement="right" title="Location" color="black">
+                    <AiOutlineLike
+                      className={` text-xl rounded cursor-pointer block float-left  duration-500 ${
+                        open && " rotate-[360deg]"
+                      }`}
+                    />
+                  </Tooltip>
+                  <div
+                    className={`origin-left ml-2 font-medium  duration-300 ${
+                      !open && "hidden"
+                    }`}
+                  >
+                    Top likelar
+                  </div>
+                </div>
+              </Link>
+              <Link
+                onClick={() =>
+                  setFilter((prew: any) =>
+                    !prew.filterLike || prew.filterLike === "desc"
+                      ? { filterComment: "desc" }
+                      : { filterComment: "" }
+                  )
+                }
+                href={"/"}
+                className={`${open && "flex flex-col"}  `}
               >
-                TailwindCss
+                <div
+                  onClick={() => setFilter({ filterLike: "desc" })}
+                  className={`px-3 py-[2px] cursor-pointer ${!open && "w-12"} ${
+                    filter.filterComment === "desc" &&
+                    "bg-slate-200 dark:bg-slate-700"
+                  } dark:hover:bg-slate-700 hover:bg-slate-200 inline-flex  items-center`}
+                >
+                  <Tooltip placement="right" title="Location" color="black">
+                    <LiaComment
+                      className={` text-xl rounded cursor-pointer block float-left  duration-500 ${
+                        open && " rotate-[360deg]"
+                      }`}
+                    />
+                  </Tooltip>
+                  <div
+                    className={`origin-left ml-2 font-medium  duration-300 ${
+                      !open && "hidden"
+                    }`}
+                  >
+                    Top suhbatlar
+                  </div>
+                </div>
+              </Link>
+            </div>
+            <div className={`${open && "flex flex-col"}  `}>
+              <div
+                className={`px-3 py-[2px] cursor-pointer ${
+                  !open && "w-12"
+                }  dark:hover:bg-slate-800 hover:bg-slate-200 inline-flex  items-center`}
+                onClick={() =>
+                  theme == "dark" ? setTheme("light") : setTheme("dark")
+                }
+              >
+                {theme == "dark" ? (
+                  <CiLight className=" text-xl font-semibold" />
+                ) : (
+                  <MdDarkMode className=" text-xl" />
+                )}
+
+                <div
+                  className={`origin-left ml-2 font-medium  duration-300 ${
+                    !open && "hidden"
+                  }`}
+                >
+                  {theme !== "dark" ? "Dark" : "Light"}
+                </div>
               </div>
             </div>
-            <ThemeButton />
-          </Link>
+          </div>
         </div>
       </div>
       <div

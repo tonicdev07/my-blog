@@ -19,8 +19,14 @@ const roboto = Courgette({
 export default function Post() {
   const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
-  const { session, loadingPage, post, rootComments, createLocalComment }: any =
-    usePost();
+  const {
+    session,
+    loadingPage,
+    setFilter,
+    post,
+    rootComments,
+    createLocalComment,
+  }: any = usePost();
   const {
     loading,
     error,
@@ -92,6 +98,11 @@ export default function Post() {
                   {post?.tags?.map((i: any) => (
                     <Link
                       href={"#"}
+                      onClick={() => {
+                        setFilter({ filterTag: i.name });
+                        setIsOpen(false);
+                        router.back();
+                      }}
                       key={i.id}
                       className="py-[2px] px-2 rounded-lg bg-[#e3e3e3] dark:bg-[#28344d]"
                     >

@@ -1,22 +1,25 @@
 import { makeRequest } from "@/services/makeRequest";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
+import NextAuth from "next-auth/next";
+
 interface GoogleProviderTy {
   clientId: string;
   clientSecret: string;
 }
+
 interface GoogleData {
   given_name: string;
   family_name: string;
   email: string;
   picture: string;
 }
+
 export const authOptions: NextAuthOptions = {
-  pages: {
-    signIn: "/login",
-  },
+  // pages: {
+  //   signIn: "/login",
+  // },
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -24,16 +27,15 @@ export const authOptions: NextAuthOptions = {
         username: {
           label: "Username",
           type: "text",
-          placeholder: "your-cool-username",
+          placeholder: "Elektron pochta",
         },
         password: {
           label: "Password",
           type: "password",
-          placeholder: "your-awesome-password",
+          placeholder: "parol",
         },
       },
-      async authorize(credentials, req) {
-
+      async authorize(credentials) {
         const res = await makeRequest("/api/login", {
           method: "POST",
           headers: {
@@ -44,7 +46,7 @@ export const authOptions: NextAuthOptions = {
             password: credentials?.password,
           }),
         });
-        
+
         if (res) {
           return res;
         } else {
@@ -57,14 +59,9 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET_ID,
     } as GoogleProviderTy),
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    } as GoogleProviderTy),
   ],
   callbacks: {
-    async signIn({ user, account, profile }) {
-
+    async signIn({ profile }) {
       if (profile !== undefined) {
         const dataProfile = profile as GoogleData;
         const response = await makeRequest("/api/auth/userExists", {
@@ -73,7 +70,7 @@ export const authOptions: NextAuthOptions = {
             email: dataProfile.email,
           },
         });
-        
+
         if (response && response.isCheck === true) {
           return true;
         } else {
@@ -87,7 +84,7 @@ export const authOptions: NextAuthOptions = {
           };
           await makeRequest("/api/register", {
             method: "POST",
-            data: data
+            data: data,
           });
           return true;
         }
@@ -95,10 +92,10 @@ export const authOptions: NextAuthOptions = {
         return true;
       }
     },
-    async jwt({ token, user, profile }) {
+    async jwt({ token, user }) {
       return { ...token, ...user };
     },
-    async session({ session, token }) {
+    async session({ session, token }: any) {
       const response = async () => {
         if (!token.accessToken) {
           const data = await makeRequest("/api/auth/userExists", {
@@ -117,10 +114,11 @@ export const authOptions: NextAuthOptions = {
   },
   jwt: {
     maxAge: 60 * 60,
-    secret: "secret2",
   },
   session: {
     strategy: "jwt",
     maxAge: 60 * 60,
   },
 };
+
+export default NextAuth(authOptions);
