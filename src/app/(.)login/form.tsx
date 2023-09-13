@@ -124,9 +124,9 @@ export const LoginForm = () => {
                 Google orqali kirish
               </a>
               <div>
-                <span>Account yo'qmi? </span>
+                <span>Account yo&apos;qmi? </span>
                 <Link className=" text-sm text-blue-600" href={"/signup"}>
-                  Ro'yxatdan o'tish
+                  Ro&apos;yxatdan o&apos;tish
                 </Link>
               </div>
             </form>
