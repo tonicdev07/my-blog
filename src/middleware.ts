@@ -23,8 +23,11 @@ export default withAuth(
     // }
   },
   {
+    secret: process.env.SECRET_KEY,
     callbacks: {
-      authorized: ({ token }) => {        
+      authorized: ({ token }) => {   
+        console.log("key", process.env.SECRET_KEY);
+             
         return !!token;
       },
     },
