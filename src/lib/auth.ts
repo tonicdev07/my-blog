@@ -19,7 +19,14 @@ export const authOptions: AuthOptions = {
   // pages: {
   //   signIn: "/login",
   // },
+  pages: {
+    signIn: "/login",
+  },
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_SECRET_ID,
+    } as GoogleProviderTy),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -53,10 +60,6 @@ export const authOptions: AuthOptions = {
         }
       },
     }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_SECRET_ID,
-    } as GoogleProviderTy),
   ],
   callbacks: {
     async signIn({ profile }) {
@@ -110,6 +113,10 @@ export const authOptions: AuthOptions = {
       return session;
     },
   },
+  // secret: process.env.SECRET_KEY,
+  // jwt: {
+  //   secret: process.env.SECRET_KEY,
+  // },
   jwt: {
     maxAge: 60 * 60,
   },

@@ -7,7 +7,6 @@ const montserrat = Raleway({ subsets: ["latin"] });
 import ico from "../../public/favicon.ico";
 import Provider from "./provider";
 import AppBar from "@/components/AppBar";
-import CustomMenu from "@/components/Menu";
 
 export const metadata: Metadata = {
   title: "Tonic Shop",

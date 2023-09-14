@@ -30,7 +30,6 @@ export const LoginForm = () => {
         password: formValues.password,
         // callbackUrl,
       });
-      console.log(res);
 
       setLoading(false);
       if (!res?.error) {
@@ -61,7 +60,7 @@ export const LoginForm = () => {
       open={isOpen}
       onClose={() => {
         setIsOpen(false);
-        router.back();
+        // router.back();
       }}
       className="relative z-50"
     >

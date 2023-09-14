@@ -1,5 +1,6 @@
 import CustomMenu from "@/components/Menu";
 import PostList from "@/components/postList";
+import React from "react";
 
 export default async function Home() {
   return (
@@ -8,7 +9,7 @@ export default async function Home() {
         <CustomMenu />
       </div>
       <div className=" mx-auto  min-h-screen max-w-5xl px-3 md:px-2 ">
-        <PostList />
+          <PostList />
       </div>
     </div>
   );

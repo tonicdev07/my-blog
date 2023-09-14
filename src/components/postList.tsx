@@ -124,10 +124,10 @@ const PostList = () => {
             <div className="h-8 w-8 rounded-full border-2 border-dotted border-blue-600 animate-spin" />
           </div>
         ) : (
-          postLike?.map((post) => (
+          postLike.map((post, index) => (
             <>
               <div
-                key={post.id}
+                key={index}
                 className="box-effect max-w-[300px] border  p-2"
               >
                 <div
@@ -162,7 +162,11 @@ const PostList = () => {
                     })()}
                   </div>
                   <div className=" relative h-48">
-                    <CustomImage product={post.images[0].imageUrl} fill />
+                    {post.images[0].imageUrl ? (
+                      <CustomImage product={post.images[0].imageUrl} fill />
+                    ) : (
+                      <>Loading</>
+                    )}
                   </div>
                 </div>
                 <div className="flex justify-around h-10 my-1 items-center">
