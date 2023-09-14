@@ -133,10 +133,10 @@ export const authOptions: AuthOptions = {
     },
   },
   secret: process.env.SECRET_KEY,
-  // jwt: {
-  //   maxAge: 60 * 60,
-  //   secret: process.env.SECRET_KEY,
-  // },
+  jwt: {
+    maxAge: 60 * 60,
+    secret: process.env.SECRET_KEY,
+  },
   // session: {
   //   // strategy: "jwt",
   //   maxAge: 60 * 60,
