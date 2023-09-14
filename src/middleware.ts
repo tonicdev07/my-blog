@@ -1,4 +1,5 @@
 // Ref: https://next-auth.js.org/configuration/nextjs#advanced-usage
+import { getToken } from "next-auth/jwt";
 import { withAuth, NextRequestWithAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
@@ -23,12 +24,16 @@ export default withAuth(
     // }
   },
   {
-    secret: process.env.SECRET_KEY,
     callbacks: {
-      authorized: ({ token }) => {   
-        console.log("key", process.env.SECRET_KEY);
-             
-        return !!token;
+      authorized: async ({ req }) => {
+        
+        const session = await getToken({
+          req,
+          // secret: process.env.SECRET_KEY,
+        });
+        
+        console.log(session);
+        return !!session;
       },
     },
   }

@@ -108,22 +108,23 @@ export const authOptions: AuthOptions = {
     //     return true;
     //   }
     // },
+
     async jwt({ token, user }) {
       return { ...token, ...user };
     },
     async session({ session, token }: any) {
-      const response = async () => {
-        if (!token.accessToken) {
-          const data = await makeRequest("/api/auth/userExists", {
-            method: "POST",
-            data: { email: session?.user?.email },
-          });
-          return data;
-        }
-        return null;
-      };
+      // const response = async () => {
+      //   if (!token.accessToken) {
+      //     const data = await makeRequest("/api/auth/userExists", {
+      //       method: "POST",
+      //       data: { email: session?.user?.email },
+      //     });
+      //     return data;
+      //   }
+      //   return null;
+      // };
 
-      const data = await response();
+      // const data = await response();
       // console.log(data);
 
       session.user = token;
@@ -132,14 +133,12 @@ export const authOptions: AuthOptions = {
     },
   },
   // secret: process.env.SECRET_KEY,
-  jwt: {
-    maxAge: 60 * 60,
-    // secret: process.env.SECRET_KEY,
-  },
-  session: {
-    strategy: "jwt",
-    maxAge: 60 * 60,
-  },
+  // jwt: {
+  //   maxAge: 60 * 60,
+  //   secret: process.env.SECRET_KEY,
+  // },
+  // session: {
+  //   // strategy: "jwt",
+  //   maxAge: 60 * 60,
+  // },
 };
-
-export default NextAuth(authOptions);
