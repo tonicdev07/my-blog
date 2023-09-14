@@ -29,7 +29,7 @@ export default withAuth(
         
         const session = await getToken({
           req,
-          // secret: process.env.SECRET_KEY,
+          secret: process.env.SECRET_KEY,
         });
         
         console.log(session);

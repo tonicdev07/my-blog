@@ -132,7 +132,7 @@ export const authOptions: AuthOptions = {
       return session;
     },
   },
-  // secret: process.env.SECRET_KEY,
+  secret: process.env.SECRET_KEY,
   // jwt: {
   //   maxAge: 60 * 60,
   //   secret: process.env.SECRET_KEY,
