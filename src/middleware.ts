@@ -24,14 +24,14 @@ export default withAuth(
     // }
   },
   {
+    secret: process.env.SECRET_KEY,
     callbacks: {
       authorized: async ({ req }) => {
-        
         const session = await getToken({
           req,
           secret: process.env.SECRET_KEY,
         });
-        
+
         console.log(session);
         return !!session;
       },
