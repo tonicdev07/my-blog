@@ -104,21 +104,21 @@ export const authOptions: AuthOptions = {
       return { ...token, ...user };
     },
     async session({ session, token }: any) {
-      const response = async () => {
-        if (!token.accessToken) {
-          const data = await makeRequest("/api/auth/userExists", {
-            method: "POST",
-            data: { email: session?.user?.email },
-          });          
-          return data;
-        }
-        return null;
-      };
+      // const response = async () => {
+      //   if (!token.accessToken) {
+      //     const data = await makeRequest("/api/auth/userExists", {
+      //       method: "POST",
+      //       data: { email: session?.user?.email },
+      //     });          
+      //     return data;
+      //   }
+      //   return null;
+      // };
 
-      const data = await response();
+      // const data = await response();
 
-      // session.user = token;
-      session.user = data === null ? token : (data as any);
+      session.user = token;
+      // session.user = data === null ? token : (data as any);
       return session;
     },
   },
