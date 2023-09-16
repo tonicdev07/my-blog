@@ -1,22 +1,24 @@
 "use client";
+import React from "react";
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
-export const Login = () => {
+const Login = () => {
   const router = useRouter();
+  const session = useSession();
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
     username: "",
     password: "",
   });
   const [error, setError] = useState("");
-
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
-  //   console.log(callbackUrl);
+
+  if (session.status === "authenticated") return <>{router.push("/")}</>;
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +34,6 @@ export const Login = () => {
 
       setLoading(false);
       if (!res?.error) {
-        // console.log(res);
         router.push(res?.url as any);
       } else {
         setError("Email yoki parol xato!");
@@ -42,10 +43,6 @@ export const Login = () => {
       setError(error);
     }
   };
-
-  async function SignGoogle() {
-    await signIn("google");
-  }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -98,11 +95,27 @@ export const Login = () => {
       <a
         className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
         style={{ backgroundColor: "#3b5998" }}
-        onClick={SignGoogle}
+        onClick={() => signIn("google")}
         role="button"
       >
         Google orqali kirish
       </a>
+      <a
+        className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
+        style={{ backgroundColor: "#3b5998" }}
+        onClick={() => signIn("github")}
+        role="button"
+      >
+        Github orqali kirish
+      </a>
+      {/* <a
+        className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
+        style={{ backgroundColor: "#3b5998" }}
+        onClick={() => signIn("facebook")}
+        role="button"
+      >
+        Facebook orqali kirish
+      </a> */}
       <div>
         <span>Account yo&apos;qmi? </span>
         <Link className=" text-sm text-blue-600" href={"/signup"}>
@@ -112,3 +125,5 @@ export const Login = () => {
     </form>
   );
 };
+
+export default Login;

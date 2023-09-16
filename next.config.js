@@ -3,21 +3,15 @@ dotenv.config();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  variants: {
-    extend: {
-      maxHeight: ["focus"],
-      backgroundColor: ['active'],
-    },
-  },
   env: {
     DATABASE_URL: process.env.DATABASE_URL,
+    SECRET_KEY: "eefeijfksvdvdsvdsdsvsdvdvdfgbfgbgfbfgbfgbkjhfuhudhfudd=",
   },
   // reactStrictMode: true,
   experimental: {
     appDir: true,
   },
   compiler: {
-    // Enables the styled-components SWC transform
     styledComponents: true,
   },
   images: {

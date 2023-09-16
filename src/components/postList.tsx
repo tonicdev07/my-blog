@@ -124,80 +124,72 @@ const PostList = () => {
             <div className="h-8 w-8 rounded-full border-2 border-dotted border-blue-600 animate-spin" />
           </div>
         ) : (
-          postLike.map((post, index) => (
-            <>
+          postLike.map((post) => (
+            <div key={post.id} className="box-effect max-w-[300px] border  p-2">
               <div
-                key={index}
-                className="box-effect max-w-[300px] border  p-2"
+                className=" cursor-pointer"
+                onClick={() => pushCheck(post.id)}
               >
                 <div
-                  className=" cursor-pointer"
-                  onClick={() => pushCheck(post.id)}
+                  className={`${title.className} px-2 mt-3 leading-6 text-xl h-16 font-semibold break-words dark:text-white text-black`}
                 >
-                  <div
-                    className={`${title.className} px-2 mt-3 leading-6 text-xl h-16 font-semibold break-words dark:text-white text-black`}
-                  >
-                    {post.title}
-                  </div>
-                  <div className={`${roboto.className} px-2 my-2 text-sm `}>
-                    {(() => {
-                      const date = new Date(post.uploaded);
-                      const options = {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      };
-                      const formattedDate = date.toLocaleDateString(
-                        "en-US",
-                        options as object
-                      );
-                      // Soat, daqiqa va soniyalarni olish
-                      var hours = date.getHours().toString().padStart(2, "0");
-                      var minutes = date
-                        .getMinutes()
-                        .toString()
-                        .padStart(2, "0");
-
-                      return `${formattedDate} • ${hours + ":" + minutes}`;
-                    })()}
-                  </div>
-                  <div className=" relative h-48">
-                    {post.images[0].imageUrl ? (
-                      <CustomImage product={post.images[0].imageUrl} fill />
-                    ) : (
-                      <>Loading</>
-                    )}
-                  </div>
+                  {post.title}
                 </div>
-                <div className="flex justify-around h-10 my-1 items-center">
-                  <div className="flex justify-center">
-                    <div
-                      onClick={() => onToggleLike(post.id)}
-                      className="w-7 leading- h-7 flex  items-center justify-center"
-                    >
-                      {!post.likedByMe ? (
-                        <BsHeart className="  font-semibold hover:text-red-600 text-lg hover:text-2xl duration-300  cursor-pointer  " />
-                      ) : (
-                        <BsHeartFill className="  font-semibold text-red-600 text-lg hover:text-2xl duration-300  cursor-pointer  " />
-                      )}
-                    </div>
-                    <span className=" ">{post.likeCount}</span>
-                  </div>
-                  <div className="flex justify-center">
-                    <div
-                      onClick={() => pushCheck(post.id)}
-                      className="w-9 h-7 flex  items-center justify-center"
-                    >
-                      <AiOutlineComment className=" w-10 font-semibold hover:text-green-600 text-2xl hover:text-3xl duration-300  cursor-pointer  " />
-                    </div>
-                    <span className=" leading-6">{post?.comments}</span>
-                  </div>
-                  <Link href={"#"}>
-                    <BsShare className=" w-10 font-semibold hover:text-purple-700 text-lg hover:text-2xl duration-300  cursor-pointer  " />
-                  </Link>
+                <div className={`${roboto.className} px-2 my-2 text-sm `}>
+                  {(() => {
+                    const date = new Date(post.uploaded);
+                    const options = {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    };
+                    const formattedDate = date.toLocaleDateString(
+                      "en-US",
+                      options as object
+                    );
+                    // Soat, daqiqa va soniyalarni olish
+                    var hours = date.getHours().toString().padStart(2, "0");
+                    var minutes = date.getMinutes().toString().padStart(2, "0");
+
+                    return `${formattedDate} • ${hours + ":" + minutes}`;
+                  })()}
+                </div>
+                <div className=" relative h-48">
+                  {post.images[0].imageUrl ? (
+                    <CustomImage product={post.images[0].imageUrl} fill />
+                  ) : (
+                    <>Loading</>
+                  )}
                 </div>
               </div>
-            </>
+              <div className="flex justify-around h-10 my-1 items-center">
+                <div className="flex justify-center">
+                  <div
+                    onClick={() => onToggleLike(post.id)}
+                    className="w-7 leading- h-7 flex  items-center justify-center"
+                  >
+                    {!post.likedByMe ? (
+                      <BsHeart className="  font-semibold hover:text-red-600 text-lg hover:text-2xl duration-300  cursor-pointer  " />
+                    ) : (
+                      <BsHeartFill className="  font-semibold text-red-600 text-lg hover:text-2xl duration-300  cursor-pointer  " />
+                    )}
+                  </div>
+                  <span className=" ">{post.likeCount}</span>
+                </div>
+                <div className="flex justify-center">
+                  <div
+                    onClick={() => pushCheck(post.id)}
+                    className="w-9 h-7 flex  items-center justify-center"
+                  >
+                    <AiOutlineComment className=" w-10 font-semibold hover:text-green-600 text-2xl hover:text-3xl duration-300  cursor-pointer  " />
+                  </div>
+                  <span className=" leading-6">{post?.comments}</span>
+                </div>
+                <Link href={"#"}>
+                  <BsShare className=" w-10 font-semibold hover:text-purple-700 text-lg hover:text-2xl duration-300  cursor-pointer  " />
+                </Link>
+              </div>
+            </div>
           ))
         )}
       </div>
