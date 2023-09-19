@@ -9,6 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
+import ReactTable from "./reactTable";
 
 const AdminPost = () => {
   const [postName, setPostName] = useState("");
@@ -52,6 +53,7 @@ const AdminPost = () => {
       body: desc,
       tags: selected,
       imageUrl: images.fileUrl,
+      imageKey: images.fileKey,
     };
     try {
       const url = `/api/post`;
@@ -80,22 +82,22 @@ const AdminPost = () => {
   type ValidationSchema = z.infer<typeof loginFormSchema>;
 
   return (
-    <>
+    <div className="flex flex-col gap-3">
       <form
         onSubmit={(e) => e.preventDefault()}
         className=" text-center w-[500px] mx-auto"
       >
         <div className="  border-b border-teal-500 py-2">
           <input
-            className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${
+            className={`w-full px-3 py-2 text-sm leading-tight  border ${
               errors.title && "border-red-500"
             } rounded appearance-none focus:outline-none focus:shadow-outline`}
             type="text"
-            value={postName}
+            // value={postName}
             placeholder="Post nomi"
             aria-label="Post nomi"
             {...register("title")}
-            onChange={(e) => setPostName(e.target.value)}
+            onBlur={(e) => setPostName(e.target.value)}
           />
           <div>
             {errors.title && (
@@ -107,13 +109,12 @@ const AdminPost = () => {
         </div>
         <div className="border-b border-teal-500 py-2">
           <textarea
-            value={desc}
-            className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${
+            className={`w-full px-3 py-2 text-sm leading-tight  border ${
               errors.body && "border-red-500"
             } rounded appearance-none focus:outline-none focus:shadow-outline`}
             {...register("body")}
             placeholder="Post haqida ma'lumot"
-            onChange={(e) => setDesc(e.target.value)}
+            onBlur={(e) => setDesc(e.target.value)}
           />
           {errors.body && (
             <p className="text-xs italic text-red-500 mb-2">
@@ -142,13 +143,17 @@ const AdminPost = () => {
         )}
         <button
           disabled={stop}
-          className={` ${!stop ? 'bg-blue-600' : "bg-blue-300"} p-1 px-4 rounded-md text-white`}
+          className={` ${
+            !stop ? "bg-blue-600" : "bg-blue-300"
+          } p-1 px-4 rounded-md text-white`}
           onClick={handleSubmit(onSubmit)}
         >
           Post
         </button>
       </form>
-    </>
+
+      <ReactTable />
+    </div>
   );
 };
 

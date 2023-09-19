@@ -33,7 +33,7 @@ const FloatBtn: React.FC<FloatBtnProps> = ({ user }: any) => (
       placement="leftBottom"
       trigger="click"
     >
-      <Tooltip placement="right" color="black"  zIndex={10} title="Profile setting">
+      <Tooltip placement="left" color="black"  zIndex={10} title="Profile setting">
         <Button className=" rounded-full h-8 w-8">
           <Image
             src={user.image}

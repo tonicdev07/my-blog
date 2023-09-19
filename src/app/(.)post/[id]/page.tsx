@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 import { Courgette } from "next/font/google";
+
 const roboto = Courgette({
   weight: "400",
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function Post() {
     rootComments,
     createLocalComment,
   }: any = usePost();
+
   const {
     loading,
     error,
@@ -60,7 +62,21 @@ export default function Post() {
             }
           >
             {loadingPage ? (
-              <div className="h-8 w-8 rounded-full border-2 border-dotted border-blue-600 animate-spin" />
+              <div className="flex justify-center">
+                <div className="spinner-container">
+                  <div className="spinner">
+                    <div className="spinner">
+                      <div className="spinner">
+                        <div className="spinner">
+                          <div className="spinner">
+                            <div className="spinner"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ) : (
               <div className=" mx-auto">
                 <div
@@ -99,14 +115,14 @@ export default function Post() {
                     <Link
                       href={"#"}
                       onClick={() => {
-                        setFilter({ filterTag: i.name });
+                        setFilter({ filterTag: i });
                         setIsOpen(false);
                         router.back();
                       }}
-                      key={i.id}
+                      key={i}
                       className="py-[2px] px-2 rounded-lg bg-[#e3e3e3] dark:bg-[#28344d]"
                     >
-                      <span className=" text-sm ">#{i.name}</span>
+                      <span onClick={() => console.log(i)} className=" text-sm ">#{i}</span>
                     </Link>
                   ))}
                 </div>

@@ -4,10 +4,9 @@ dotenv.config();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    DATABASE_URL: process.env.DATABASE_URL,
+    DATABASE_URL: process.env.DATABASE_URLPOST,
     SECRET_KEY: "eefeijfksvdvdsvdsdsvsdvdvdfgbfgbgfbfgbfgbkjhfuhudhfudd=",
   },
-  // reactStrictMode: true,
   experimental: {
     appDir: true,
   },

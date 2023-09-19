@@ -5,7 +5,8 @@ interface RequestBody {
   body: string;
   title: string;
   imageUrl: string;
-  tags: [{ name: string }];
+  imageKey: string;
+  tags: [];
 }
 
 export async function POST(req: Request) {
@@ -24,10 +25,11 @@ export async function POST(req: Request) {
 
   const tags = body.tags.map((tag) => ({ name: tag })) as any;
 
-  const existingTags = await prisma.tag.findMany({
-    where: { OR: tags },
-    select: { id: true, name: true },
-  });
+  // const existingTags = await prisma.tag.findMany({
+  //   where: { OR: tags },
+  //   select: { id: true, name: true },
+  // });
+
   const postName = await prisma.post.findMany({
     where: { title: body.title },
     select: { title: true },
@@ -44,26 +46,24 @@ export async function POST(req: Request) {
       }
     );
 
-  const tagsToConnect = existingTags.map((tag) => ({ id: tag.id }));
+  // const tagsToConnect = existingTags.map((tag) => ({ id: tag.id }));
 
-  const createNewTags = tags.filter((newTag: any) => {
-    return !existingTags.some(
-      (existingTag: any) => existingTag.name === newTag.name
-    );
-  });
+  // const createNewTags = tags.filter((newTag: any) => {
+  //   return !existingTags.some(
+  //     (existingTag: any) => existingTag.name === newTag.name
+  //   );
+  // });
 
   const createPost = await prisma.post
     .create({
       data: {
         body: body.body,
         title: body.title,
-        tags: {
-          connect: tagsToConnect,
-          create: createNewTags,
-        },
+        tags: body.tags,
         images: {
           create: {
             imageUrl: body.imageUrl,
+            imageKey: body.imageKey,
           },
         },
       },

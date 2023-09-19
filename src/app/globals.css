@@ -8,10 +8,70 @@
   box-sizing: border-box;
 }
 
+/* ======================================================================= */
+
+.spinner-container {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  margin: 30px auto;
+  overflow: hidden;
+}
+
+.spinner {
+  position: absolute;
+  width: calc(100% - 9.9px);
+  height: calc(100% - 9.9px);
+  border: 5px solid transparent;
+  border-radius: 50%;
+  border-top-color: #26ecfa;
+  animation: spin 5s cubic-bezier(0.17, 0.49, 0.96, 0.79) infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ======================================================================= */
+
+.gradient {
+  background: rgb(14, 18, 23);
+  background: linear-gradient(
+    90deg,
+    rgba(14, 18, 23, 1) 18%,
+    rgba(14, 18, 23, 0.854954481792717) 46%,
+    rgba(14, 18, 23, 0) 100%
+  );
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+}
+
+.gradient_white {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 18%,
+    rgba(255, 255, 255, 0.854954481792717) 46%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
 .box-effect {
   background: rgba(97, 95, 95, 0.153);
   border-radius: 16px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(106, 104, 104, 0.3) 0px 8px 16px -8px;  backdrop-filter: blur(10px);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(106, 104, 104, 0.3) 0px 8px 16px -8px;
+  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(5px);
 }
 
@@ -20,6 +80,7 @@
     @apply border px-5 md:px-10 py-2.5 rounded font-semibold transition duration-200 ease-out;
   }
 }
+
 @layer base {
   body {
     @apply dark:bg-[#0e1217] bg-white text-[#525866]  dark:text-[#cbd5f0] text-[15px];
@@ -53,8 +114,7 @@
   bottom: 0px;
 }
 
-
-.animation{
+.animation {
   animation-name: identifier;
   opacity: 0;
   position: absolute;
@@ -71,7 +131,6 @@
 }
 
 /* Parent elementga hover qilganda child elementlarni ko'rsatish */
-
 
 button {
   font-size: inherit;

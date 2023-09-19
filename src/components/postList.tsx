@@ -64,14 +64,10 @@ const PostList = () => {
   } = useQuery({ queryKey: ["todos"], queryFn: getPosts });
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (posts) {
-        setPostLike(posts as any);
-      }
-      await refetch();
-    };
-
-    fetchData();
+    if (posts) {
+      setPostLike(posts as any);
+    }
+    refetch();
   }, [posts, filter]);
 
   if (error) return <h1 className="error-msg">{error as string}</h1>;
@@ -117,23 +113,37 @@ const PostList = () => {
 
   return (
     <div className="mt-20">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* ===== box ====== */}
-        {loading ? (
-          <div className=" min-h-screen flex justify-center items-center">
-            <div className="h-8 w-8 rounded-full border-2 border-dotted border-blue-600 animate-spin" />
+      {/* ===== box ====== */}
+      {loading ? (
+        <div className=" min-h-screen flex justify-center items-center">
+          <div className="flex justify-center">
+            <div className="spinner-container">
+              <div className="spinner">
+                <div className="spinner">
+                  <div className="spinner">
+                    <div className="spinner">
+                      <div className="spinner">
+                        <div className="spinner"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        ) : (
-          postLike.map((post) => (
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {postLike.map((post) => (
             <div key={post.id} className="box-effect max-w-[300px] border  p-2">
               <div
                 className=" cursor-pointer"
                 onClick={() => pushCheck(post.id)}
               >
                 <div
-                  className={`${title.className} px-2 mt-3 leading-6 text-xl h-16 font-semibold break-words dark:text-white text-black`}
+                  className={`${title.className} px-2 mt-3 leading-6 text-xl h-[68px] font-semibold break-words dark:text-white text-black`}
                 >
-                  {post.title}
+                  {post.title.slice(0, 63)}<span className=" text-xs text-blue-500">yana..</span>
                 </div>
                 <div className={`${roboto.className} px-2 my-2 text-sm `}>
                   {(() => {
@@ -190,9 +200,9 @@ const PostList = () => {
                 </Link>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

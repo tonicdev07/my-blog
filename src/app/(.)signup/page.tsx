@@ -19,11 +19,13 @@ export default function Register() {
   const { data: session } = useSession();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(true);
+  const [loading, setLoading] = useState(false);
   if (session?.user) {
     return router.push("/");
   }
 
   async function postData(e: any) {
+    setLoading(true)
     e.preventDefault();
     const body: RequestBody = {
       firstName: e.target[0].value,
@@ -84,34 +86,40 @@ export default function Register() {
                 <input
                   className="p-2 placeholder:text-slate-400 w-full rounded-md"
                   type="text"
+                  required
                   placeholder="Ism"
                 />
                 <input
                   className="p-2 placeholder:text-slate-400 w-full rounded-md"
                   type="text"
+                  required
                   placeholder="Familya"
                 />
                 <input
                   className="p-2 placeholder:text-slate-400 w-full rounded-md"
                   type="email"
+                  required
                   placeholder="Elektron pochta"
                 />
                 <input
                   className="p-2 placeholder:text-slate-400 w-full rounded-md"
                   type="password"
+                  required
                   placeholder="Parol"
                 />
                 <input
                   className="p-2 placeholder:text-slate-400 w-full rounded-md"
                   type="text"
+                  required
                   placeholder="Foydalanuvchi nomi"
                 />
 
                 <button
+
                   type="submit"
                   className="hover:border hover:bg-white hover:text-black transition-all bg-blue-600 rounded-lg text-white border-black w-32 py-1 mx-auto"
                 >
-                  Yuklash
+                  {!loading ? "Yuklash" : "Yuklamoqda.."}
                 </button>
               </form>
             </div>

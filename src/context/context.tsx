@@ -31,15 +31,18 @@ export function PostProvider({
   session: any;
 }) {
   const { id } = useParams();
+  const [loadingPage, setLoadingS] = useState(false);
   async function getPosts(): Promise<any> {
     try {
       const url = `/api/posts/${id}`;
       const data = await makeRequest(url, {
         method: "GET",
         headers: {
-          authorization: session?.user.accessToken,
+          authorization: session.user.accessToken,
         },
       });
+      setLoadingS(false);
+
       return data;
     } catch (err) {
       console.log(err);
@@ -49,10 +52,9 @@ export function PostProvider({
   const {
     refetch,
     data: post,
-    isLoading: loadingPage,
+    isLoading: load,
     error,
-  } = useQuery({ queryKey: ["post"], queryFn: getPosts, enabled: false });
-
+  } = useQuery({ queryKey: ["post"], queryFn: getPosts, enabled: !!id });
   const [comments, setComments] = useState<string[]>([]);
   const [filter, setFilter] = useState<filterType>({
     filterComment: "",
@@ -71,11 +73,8 @@ export function PostProvider({
 
   useEffect(() => {
     if (id !== undefined) {
-      const fetchData = async () => {
-        await refetch();
-      };
-
-      fetchData();
+      refetch();
+      setLoadingS(true);
     }
     if (post?.comments == null) return;
     setComments(post.comments);

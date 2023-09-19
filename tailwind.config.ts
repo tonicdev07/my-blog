@@ -13,6 +13,13 @@ const config: Config = {
         background: "hsl(var(--background))",
       },
     },
+    screens: {
+      // xs: "320px",
+      sm: "320px",
+      md: "768px",
+      lg: "960px",
+      xl: "1200px",
+    },
   },
   plugins: [],
 };

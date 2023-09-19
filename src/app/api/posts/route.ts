@@ -1,7 +1,5 @@
 import { verifyJwt } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
-import logger from "@/utils/logger";
-import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -11,16 +9,15 @@ export async function GET(req: NextRequest) {
   const like = url.searchParams.get("like");
   const tag = url.searchParams.get("tag");
 
-  // logger.info(like + " " + "like");
-  // logger.info(comment + " " + "comment");
-
   const check =
     !accessToken ||
     !verifyJwt(accessToken as string) ||
     !process.env.SECRET_KEY;
 
   const whereCondition =
-    tag && tag !== "undefined" ? { tags: { some: { name: tag } } } : {};
+    tag && tag !== "undefined"
+      ? { tags: { hasSome: [tag] } }
+      : ({} as any);
 
   const posts = await prisma.post.findMany({
     where: whereCondition,
@@ -36,7 +33,7 @@ export async function GET(req: NextRequest) {
       },
       likes: {
         select: {
-          id: true,
+          userId: true,
         },
       },
       comments: {
@@ -44,11 +41,7 @@ export async function GET(req: NextRequest) {
           id: true,
         },
       },
-      tags: {
-        select: {
-          name: true,
-        },
-      },
+      tags: true,
     },
   });
 

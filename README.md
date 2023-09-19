@@ -102,11 +102,26 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
           width="22"
           height="22"
         />
-- Next Js
-- NextAuth
+- Next Js: app router <img
+          src="https://t3.ftcdn.net/jpg/02/35/26/30/240_F_235263034_miJw2igmixo7ymCqhHZ7c8wp9kaujzfM.jpg"
+          alt="YouTube"
+          width="22"
+          height="22"
+        />
+- NextAuth <img
+          src="https://t3.ftcdn.net/jpg/02/35/26/30/240_F_235263034_miJw2igmixo7ymCqhHZ7c8wp9kaujzfM.jpg"
+          alt="YouTube"
+          width="22"
+          height="22"
+        />
 - Tailwindcss
 - MongoDB
-- Prisma
+- Prisma <img
+          src="https://t3.ftcdn.net/jpg/02/35/26/30/240_F_235263034_miJw2igmixo7ymCqhHZ7c8wp9kaujzfM.jpg"
+          alt="YouTube"
+          width="22"
+          height="22"
+        />
 - Jsonwebtoken
 - Headlessui
 - And more..

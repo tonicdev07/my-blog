@@ -1,6 +1,5 @@
 import { verifyJwt } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
-import logger from "@/utils/logger";
 
 export async function GET(
   req: Request,
@@ -41,14 +40,14 @@ export async function GET(
         body: true,
         title: true,
         uploaded: true,
-        likes: { select: { id: true } },
+        likes: { select: { userId: true } },
         comments: {
           orderBy: {
             createdAt: "desc",
           },
           select: {
             ...COMMENT_SELECT_FIELDS,
-            likes: { select: { id: true } },
+            likes: { select: { commentId: true } },
           },
         },
         images: {
@@ -57,12 +56,7 @@ export async function GET(
             imageUrl: true,
           },
         },
-        tags: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
+        tags: true,
       },
     })
     .then(async (post: any) => {
@@ -94,7 +88,7 @@ export async function GET(
           likeCount: post?.likes.length,
         },
       };
-    });    
+    });
 
   return new Response(JSON.stringify(getPost));
 }

@@ -1,9 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 import SigninButton from "./SigninButton";
 import logo from "../assets/Logo.png";
 import Image from "next/image";
 import { Lobster } from "next/font/google";
+import { useTheme } from "next-themes";
 
 const roboto = Lobster({
   weight: "400",
@@ -11,8 +14,14 @@ const roboto = Lobster({
 });
 
 const AppBar = () => {
+  const { theme } = useTheme();
+
   return (
-    <header className="fixed dark:bg-[#0e1217] bg-white w-full flex z-50 items-center gap-4 justify-between py-2 px-3 border-b-[0.1px] shadow">
+    <header
+      className={`fixed border-b-[0.5px] ${
+        theme === "dark" ? "gradient" : "gradient_white"
+      } rounded-r-[20%] flex z-50 items-center gap-4 justify-between py-2 px-3  `}
+    >
       <div className="flex items-center gap-3">
         <Link
           className="transition-colors items-center flex hover:text-blue-500"
@@ -25,7 +34,9 @@ const AppBar = () => {
             height={40}
             width={40}
           />
-          <span className={`${roboto.className}  text-xl`}>TonicDev</span>
+          <span className={`${roboto.className} md:text-xl text-md`}>
+            TonicDev
+          </span>
         </Link>
       </div>
       <SigninButton />

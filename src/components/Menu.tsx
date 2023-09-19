@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
-import { CiLight, CiDark } from "react-icons/ci";
+import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
 import { LiaComment } from "react-icons/lia";
@@ -19,16 +19,16 @@ const CustomMenu: React.FC = () => {
 
   return (
     <div className="flex relative">
-        <div
-          className={` hidden lg:block pt-8 ${
-            open ? "w-64" : "w-12 left-[-70px]"
-          } duration-300  lg:left-0 relative z-50`}
-        ></div>
+      <div
+        className={` hidden lg:block pt-8 ${
+          open ? "w-64" : "w-12 left-[-70px]"
+        } duration-300  lg:left-0 relative z-50`}
+      ></div>
       <div className={` fixed h-screen top-0 lg:top-14  z-50 lg:bg-none`}>
         <div
-          className={` border-r   min-h-screen pt-8 ${
+          className={` border-r    min-h-screen pt-8 ${
             open ? "w-64" : "w-12 left-[-70px]"
-          } duration-300  lg:left-0 relative z-50  dark:bg-[#0e1217] bg-slate-100 `}
+          } duration-300  lg:left-0 relative z-50  dark:bg-[#0e1217] md:bg-[#ffffff]  bg-[#d6d6d6]  `}
         >
           <IoIosArrowBack
             className={` dark:bg-[#0e1217] bg-white dark:text-[#cbd5f0] text-xl rounded-full absolute  lg:-right-3 top-2 dark:hover:border-slate-400 border cursor-pointer ${
@@ -38,7 +38,11 @@ const CustomMenu: React.FC = () => {
           />
           <div className="flex flex-col h-[60vh] justify-between">
             <div>
-              <Link href={"/"} className={`${open && "flex my-2 flex-col"}  `}>
+              <Link
+                onClick={() => setOpen(false)}
+                href={"/"}
+                className={`${open && "flex my-2 flex-col"}  `}
+              >
                 <div
                   onClick={() =>
                     setFilter((prew: any) =>
@@ -80,7 +84,9 @@ const CustomMenu: React.FC = () => {
                 className={`${open && "flex flex-col"}  `}
               >
                 <div
-                  onClick={() => setFilter({ filterLike: "desc" })}
+                  onClick={() =>
+                    setFilter({ filterLike: "desc" }, setOpen(false))
+                  }
                   className={`px-3 py-[2px] cursor-pointer ${!open && "w-12"} ${
                     filter.filterComment === "desc" &&
                     "bg-slate-200 dark:bg-slate-700"
@@ -103,7 +109,7 @@ const CustomMenu: React.FC = () => {
                 </div>
               </Link>
             </div>
-            <div className={`${open && "flex flex-col"}  `}>
+            <div  onClick={() => setOpen(false)} className={`${open && "flex flex-col"}  `}>
               <div
                 className={`px-3 py-[2px] cursor-pointer ${
                   !open && "w-12"
@@ -131,7 +137,7 @@ const CustomMenu: React.FC = () => {
         </div>
       </div>
       <div
-        className={`bg-[#282626a0] dark:bg-[#585656e6] fixed z-40 top-0 h-screen right-0 ${
+        className={`bg-[#282626a0] dark:bg-[#141313ba] fixed z-40 top-0 h-screen right-0 ${
           open && "w-full lg:w-0"
         }`}
         onClick={() => setOpen(!open)}

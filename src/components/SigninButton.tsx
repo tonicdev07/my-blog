@@ -16,7 +16,7 @@ const SigninButton = () => {
   if (session && session.user) {
     return (
       <div className="flex gap-2 justify-start items-center  ml-auto">
-        <p className={`${pacifico.className} text-lg md:text-xl`}>
+        <p className={`${pacifico.className} md:text-lg sm:text-[16px] `}>
           {session.user.firstName + " " + session.user.lastName}
         </p>
         <FloatBtn user={session.user} />

@@ -3,6 +3,9 @@ import React from "react";
 
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
+import { FcGoogle } from "react-icons/fc";
+import { BsGithub } from "react-icons/bs";
+
 import { useSearchParams, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
@@ -18,7 +21,7 @@ const Login = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
-  if (session.status === "authenticated") return <>{router.push("/")}</>;
+  // if (session.status === "authenticated") return <>{router.push("/")}</>;
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,49 +82,69 @@ const Login = () => {
           className={`${input_style}`}
         />
       </div>
-      <button
-        type="submit"
-        style={{ backgroundColor: `${loading ? "#ccc" : "#3446eb"}` }}
-        className="inline-block px-7 py-4 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-        disabled={loading}
-      >
-        {loading ? "loading..." : "Kirish"}
-      </button>
+      {loading ? (
+        <div className="flex justify-center">
+          <div className="spinner-container">
+            <div className="spinner">
+              <div className="spinner">
+                <div className="spinner">
+                  <div className="spinner">
+                    <div className="spinner">
+                      <div className="spinner"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <>
+          <button
+            type="submit"
+            style={{ backgroundColor: `${loading ? "#ccc" : "#3446eb"}` }}
+            className="inline-block px-7 py-4 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+            disabled={loading}
+          >
+            {loading ? "loading..." : "Kirish"}
+          </button>
 
-      <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-        <p className="text-center font-semibold mx-4 mb-0">YOKI</p>
-      </div>
+          <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
+            <p className="text-center font-semibold mx-4 mb-0">YOKI</p>
+          </div>
 
-      <a
-        className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
-        style={{ backgroundColor: "#3b5998" }}
-        onClick={() => signIn("google")}
-        role="button"
-      >
-        Google orqali kirish
-      </a>
-      <a
-        className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
-        style={{ backgroundColor: "#3b5998" }}
-        onClick={() => signIn("github")}
-        role="button"
-      >
-        Github orqali kirish
-      </a>
-      {/* <a
-        className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
-        style={{ backgroundColor: "#3b5998" }}
-        onClick={() => signIn("facebook")}
-        role="button"
-      >
-        Facebook orqali kirish
-      </a> */}
-      <div>
-        <span>Account yo&apos;qmi? </span>
-        <Link className=" text-sm text-blue-600" href={"/signup"}>
-          Ro&apos;yxatdan o&apos;tish
-        </Link>
-      </div>
+          <a
+            className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
+            style={{ backgroundColor: "#3b5998" }}
+            onClick={() => {
+              setLoading(true);
+              signIn("google");
+            }}
+            role="button"
+          >
+            <FcGoogle className=" text-lg" />
+            &nbsp; orqali kirish
+          </a>
+          <a
+            className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
+            style={{ backgroundColor: "#3b5998" }}
+            onClick={() => {
+              setLoading(true);
+              signIn("github");
+            }}
+            role="button"
+          >
+            <BsGithub className=" text-lg" />
+            &nbsp; orqali kirish
+          </a>
+          <div>
+            <span>Account yo&apos;qmi? </span>
+            <Link className=" text-sm text-blue-600" href={"/signup"}>
+              Ro&apos;yxatdan o&apos;tish
+            </Link>
+          </div>
+        </>
+      )}
     </form>
   );
 };
