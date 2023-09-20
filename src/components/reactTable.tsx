@@ -64,26 +64,23 @@ function ReactTable() {
       };
     }) as any);
 
-  const columns = useMemo(
-    () => [
-      {
-        accessorKey: "title",
-        header: "Nomi",
-        size: 140,
-      },
-      {
-        accessorKey: "countLike",
-        header: "Like",
-        size: 20,
-      },
-      {
-        accessorKey: "countComment",
-        header: "Comment",
-        size: 20,
-      },
-    ],
-    []
-  );
+  const columns = [
+    {
+      accessorKey: "title",
+      header: "Nomi",
+      size: 140,
+    },
+    {
+      accessorKey: "countLike",
+      header: "Like",
+      size: 20,
+    },
+    {
+      accessorKey: "countComment",
+      header: "Comment",
+      size: 20,
+    },
+  ];
 
   const deleteHandler = async (row: any) => {
     if (window.confirm(`Ushbu ${row.title} o'chirilsinmi?`)) {
