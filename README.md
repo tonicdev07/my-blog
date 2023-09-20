@@ -115,7 +115,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
           height="22"
         />
 - Tailwindcss
-- MongoDB
+- PostgreSql
 - Prisma <img
           src="https://t3.ftcdn.net/jpg/02/35/26/30/240_F_235263034_miJw2igmixo7ymCqhHZ7c8wp9kaujzfM.jpg"
           alt="YouTube"
