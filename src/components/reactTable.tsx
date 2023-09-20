@@ -17,7 +17,6 @@ import MaterialReactTable from "material-react-table";
 import Link from "next/link";
 import { CgEditBlackPoint } from "react-icons/cg";
 import { MdDelete } from "react-icons/md";
-import TableUpdate from "./tableUpdate";
 import { makeRequest } from "@/services/makeRequest";
 import { usePost } from "@/context/context";
 import { useParams } from "next/navigation";
@@ -166,26 +165,11 @@ function ReactTable() {
               )}
             />
           </TableContainer>
-          {/* <CreateNewAccountModal
-                open={createModalOpen2}
-                getAllMovies={getAllMovies}
-                onClose={() => setCreateModalOpen2(false)}
-              /> */}
+
         </>
       )}
     </>
   );
 }
-
-// export const CreateNewAccountModal = ({ open, onClose, getAllMovies }: any) => {
-//   return (
-//     <Dialog open={open}>
-//       <DialogTitle textAlign="center">Yangilash</DialogTitle>
-//       <DialogContent>
-//         <TableUpdate getAllMovies={getAllMovies} onClose={onClose} />
-//       </DialogContent>
-//     </Dialog>
-//   );
-// };
 
 export default ReactTable;
