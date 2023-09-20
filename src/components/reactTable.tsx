@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import { toast } from "react-toastify";
 
+
+
 import MaterialReactTable from "material-react-table";
 import Link from "next/link";
 import { CgEditBlackPoint } from "react-icons/cg";
@@ -165,7 +167,6 @@ function ReactTable() {
               )}
             />
           </TableContainer>
-
         </>
       )}
     </>

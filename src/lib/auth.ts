@@ -2,8 +2,6 @@ import { makeRequest } from "@/services/makeRequest";
 import  { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import GithubPrivider from "next-auth/providers/github";
-import FacebookProvider from "next-auth/providers/facebook";
 
 interface GoogleProviderTy {
   clientId: string;
@@ -25,14 +23,6 @@ export const authOptions: AuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET_ID,
-    } as GoogleProviderTy),
-    GithubPrivider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
-    } as GoogleProviderTy),
-    FacebookProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
     } as GoogleProviderTy),
     CredentialsProvider({
       name: "Credentials",

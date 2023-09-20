@@ -21,7 +21,7 @@ const Login = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
-  // if (session.status === "authenticated") return <>{router.push("/")}</>;
+  if (session.status === "authenticated") return <>{router.push("/")}</>;
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -123,18 +123,6 @@ const Login = () => {
             role="button"
           >
             <FcGoogle className=" text-lg" />
-            &nbsp; orqali kirish
-          </a>
-          <a
-            className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
-            style={{ backgroundColor: "#3b5998" }}
-            onClick={() => {
-              setLoading(true);
-              signIn("github");
-            }}
-            role="button"
-          >
-            <BsGithub className=" text-lg" />
             &nbsp; orqali kirish
           </a>
           <div>
