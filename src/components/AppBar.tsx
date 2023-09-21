@@ -14,12 +14,12 @@ const roboto = Lobster({
 });
 
 const AppBar = () => {
-  const { theme } = useTheme();
-
+  const { systemTheme, theme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
   return (
     <header
       className={`fixed border-b-[0.5px] ${
-        theme === "dark" ? "gradient" : "gradient_white"
+        currentTheme === "dark" || currentTheme === "system" ? "gradient" : "gradient_white"
       } rounded-r-[20%] flex z-50 items-center gap-4 justify-between py-2 px-3  `}
     >
       <div className="flex items-center gap-3">

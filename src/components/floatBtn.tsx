@@ -11,15 +11,16 @@ interface FloatBtnProps {
 }
 const content = (
   <div className="p-1 ">
-    <Link  href={"/profile"} className="flex mb-2 items-center gap-1 ">
+    <Link href={"/profile"} className="flex mb-2 items-center gap-1 ">
       <CgProfile className=" text-xl" />
       <div>Profile</div>
     </Link>
-    <div className="flex hover:text-red-500  items-center gap-1 " onClick={() => signOut()}>
+    <div
+      className="flex hover:text-red-500  items-center gap-1 "
+      onClick={() => signOut()}
+    >
       <CgLogOut className=" text-xl" />
-      <button >
-        Logout
-      </button>
+      <button>Logout</button>
     </div>
   </div>
 );
@@ -33,16 +34,14 @@ const FloatBtn: React.FC<FloatBtnProps> = ({ user }: any) => (
       placement="leftBottom"
       trigger="click"
     >
-      <Tooltip placement="left" color="black"  zIndex={10} title="Profile setting">
-        <Button className=" rounded-full h-8 w-8">
-          <Image
-            src={user.image}
-            className="rounded-full"
-            alt={user.lastName}
-            fill
-          />
-        </Button>
-      </Tooltip>
+      <Button className=" rounded-full h-8 w-8">
+        <Image
+          src={user.image}
+          className="rounded-full"
+          alt={user.lastName}
+          fill
+        />
+      </Button>
     </Popover>
   </Space>
 );

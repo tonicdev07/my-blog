@@ -115,10 +115,10 @@ const CustomMenu: React.FC = () => {
                   !open && "w-12"
                 }  dark:hover:bg-slate-800 hover:bg-slate-200 inline-flex  items-center`}
                 onClick={() =>
-                  theme == "dark" ? setTheme("light") : setTheme("dark")
+                  currentTheme == "dark" ? setTheme("light") : setTheme("dark")
                 }
               >
-                {theme == "dark" ? (
+                {currentTheme == "dark" ? (
                   <CiLight className=" text-xl font-semibold" />
                 ) : (
                   <MdDarkMode className=" text-xl" />
@@ -129,7 +129,7 @@ const CustomMenu: React.FC = () => {
                     !open && "hidden"
                   }`}
                 >
-                  {theme !== "dark" ? "Dark" : "Light"}
+                  {currentTheme !== "dark" ? "Dark" : "Light"}
                 </div>
               </div>
             </div>
