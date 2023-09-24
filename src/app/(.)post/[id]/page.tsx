@@ -20,6 +20,7 @@ const roboto = Courgette({
 export default function Post() {
   const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
+
   const {
     session,
     loadingPage,
@@ -62,23 +63,31 @@ export default function Post() {
             }
           >
             {loadingPage ? (
-              <div className="flex justify-center">
-                <div className="spinner-container">
-                  <div className="spinner">
-                    <div className="spinner">
-                      <div className="spinner">
-                        <div className="spinner">
-                          <div className="spinner">
-                            <div className="spinner"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+              <div className="min-h-screen lg:w-[800px] md:w-[500px] w-[200px] ">
+
+                <div className="max-w-4xl mx-auto px-4 py-8">
+                  <div className="animate-pulse space-y-4">
+                    <div className="h-4 bg-gray-300 rounded w-2/3"></div>
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                  </div>
+
+                  <div className="animate-pulse space-y-4 mt-12">
+                    <div className="h-4 bg-gray-300 rounded w-2/3"></div>
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded"></div>
                   </div>
                 </div>
               </div>
             ) : (
-              <div className=" mx-auto">
+              <div className="mx-auto">
                 <div
                   className={`${roboto.className}  flex justify-end mb-4 text-sm `}
                 >
@@ -122,7 +131,12 @@ export default function Post() {
                       key={i}
                       className="py-[2px] px-2 rounded-lg bg-[#e3e3e3] dark:bg-[#28344d]"
                     >
-                      <span onClick={() => console.log(i)} className=" text-sm ">#{i}</span>
+                      <span
+                        onClick={() => console.log(i)}
+                        className=" text-sm "
+                      >
+                        #{i}
+                      </span>
                     </Link>
                   ))}
                 </div>

@@ -4,7 +4,6 @@ import prisma from "@/lib/prisma";
 export async function POST(req: any, { params }: { params: { id: string } }) {
   const accessToken = req.headers.get("authorization");
   const body = await req.json();
-  console.log(params);
 
   if (!accessToken || !verifyJwt(accessToken)) {
     return new Response(

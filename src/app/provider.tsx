@@ -1,16 +1,17 @@
 "use client";
 import { ThemeProvider } from "next-themes";
-
 import { SessionProvider } from "next-auth/react";
 import React, { FC, ReactNode, useEffect, useState } from "react";
 // import { ReactQueryDevtools } from "react-query-devtools";
 import { HydrationProvider, Client } from "react-hydration-provider";
 import ProviderCustom from "./providerCustom";
 import { QueryClient, QueryClientProvider } from "react-query";
+import createFastContext from "@/context/fastContext";
 
 const queryClient = new QueryClient();
 
 const Provider: FC<{ children: ReactNode }> = ({ children }) => {
+
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

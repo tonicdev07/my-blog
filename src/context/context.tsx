@@ -31,30 +31,31 @@ export function PostProvider({
   session: any;
 }) {
   const { id } = useParams();
-  const [loadingPage, setLoadingS] = useState(false);
-  async function getPosts(): Promise<any> {
-    try {
-      const url = `/api/posts/${id}`;
-      const data = await makeRequest(url, {
-        method: "GET",
-        headers: {
-          authorization: session.user.accessToken,
-        },
-      });
-      setLoadingS(false);
-
-      return data;
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
+ 
   const {
     refetch,
     data: post,
-    isLoading: load,
+    isFetching: loadingPage,
     error,
-  } = useQuery({ queryKey: ["post"], queryFn: getPosts, enabled: !!id });
+  } = useQuery({
+    queryKey: ["post"],
+    queryFn: async () => {
+      try {
+        const url = `/api/posts/${id}`;
+        const data = await makeRequest(url, {
+          method: "GET",
+          headers: {
+            authorization: session.user.accessToken,
+          },
+        });
+        return data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    enabled: !!id,
+  });
+
   const [comments, setComments] = useState<string[]>([]);
   const [filter, setFilter] = useState<filterType>({
     filterComment: "",
@@ -72,13 +73,9 @@ export function PostProvider({
   }, [comments]);
 
   useEffect(() => {
-    if (id !== undefined) {
-      refetch();
-      setLoadingS(true);
-    }
     if (post?.comments == null) return;
     setComments(post.comments);
-  }, [id, post?.comments]);
+  }, [post?.comments]);
 
   function getReplies(parentId: string) {
     return commentsByParentId[parentId];

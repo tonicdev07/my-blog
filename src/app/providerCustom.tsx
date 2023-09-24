@@ -6,6 +6,7 @@ import React, { FC, ReactNode } from "react";
 
 const ProviderCustom: FC<{ children: ReactNode }> = ({ children }) => {
   const { data: session, status } = useSession();
+  
   return <PostProvider session={session}>{children}</PostProvider>;
 };
 

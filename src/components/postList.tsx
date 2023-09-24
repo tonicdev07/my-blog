@@ -36,8 +36,8 @@ const title = Yeseva_One({
 const PostList = () => {
   const toggleCommentLikeFn = useAsyncFn(togglePostLike);
   const { session, filter } = usePost() as any;
-
   const [postLike, setPostLike] = useState<Post[]>([]);
+
   const router = useRouter();
   function getPosts() {
     try {
@@ -143,7 +143,8 @@ const PostList = () => {
                 <div
                   className={`${title.className} px-2 mt-3 leading-6 text-xl h-[68px] font-semibold break-words dark:text-white text-black`}
                 >
-                  {post.title.slice(0, 63)}<span className=" text-xs text-blue-500">yana..</span>
+                  {post.title.slice(0, 63)}
+                  <span className=" text-xs text-blue-500">yana..</span>
                 </div>
                 <div className={`${roboto.className} px-2 my-2 text-sm `}>
                   {(() => {
