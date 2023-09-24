@@ -6,7 +6,6 @@ import React, { FC, ReactNode, useEffect, useState } from "react";
 import { HydrationProvider, Client } from "react-hydration-provider";
 import ProviderCustom from "./providerCustom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import createFastContext from "@/context/fastContext";
 
 const queryClient = new QueryClient();
 
