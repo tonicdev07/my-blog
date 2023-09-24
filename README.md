@@ -1,4 +1,4 @@
-## A great fullstack next JS blog app
+## A great fullstack blog app
 <h1><a href="https://toniblog.vercel.app" style="font-size: 32px">Demo</a></h1>
 
 <div>    <div
