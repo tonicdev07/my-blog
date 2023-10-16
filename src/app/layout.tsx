@@ -10,7 +10,7 @@ import AppBar from "@/components/AppBar";
 
 export const metadata: Metadata = {
   title: "Anvarbek Xaydarov",
-  description: "Salom do'stlar IT soahsi bo'yicha qaynoq yangiliklarni qo'yib boruvchi blogimga xush kelibsiz!!!",
+  description: "Salom do'stlar IT sohasi bo'yicha qaynoq yangiliklarni qo'yib boruvchi blog saytimga xush kelibsiz!!!",
   icons: [{ rel: "icon", url: ico.src }],
 };
 
