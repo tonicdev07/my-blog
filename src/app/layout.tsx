@@ -8,6 +8,7 @@ import ico from "../../public/favicon.ico";
 import Provider from "./provider";
 import AppBar from "@/components/AppBar";
 
+
 export const metadata: Metadata = {
   title: "Anvarbek Xaydarov",
   description: "Salom do'stlar IT sohasi bo'yicha qaynoq yangiliklarni qo'yib boruvchi blog saytimga xush kelibsiz!!!",
