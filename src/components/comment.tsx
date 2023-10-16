@@ -12,8 +12,9 @@ import { useUser } from "../hooks/useUser";
 import { useEffect, useState } from "react";
 import { usePost } from "@/context/context";
 import { useAsyncFn } from "@/hooks/useAsync";
-import { IconBtn  } from "./iconBtn";
+import { IconBtn } from "./iconBtn";
 import { CommentList } from "./commentList";
+import Image from "next/image";
 
 const dateFormatter = new Intl.DateTimeFormat(undefined, {
   dateStyle: "medium",
@@ -120,9 +121,20 @@ export function Comment({
             : " ml-40 md:ml-96 duration-1000 "
         } `}
       >
-        <div className="header flex justify-between">
-          <span className="border px-1 rounded-sm dark:bg-slate-600 bg-yellow-50">
-            {user.firstName + " " + user.lastName}
+        <div className="header flex justify-between md:flex-row sm:flex-col">
+          <span className="flex items-center">
+            <span className="mr-1">
+              <Image
+                src={user.image}
+                className="rounded-full"
+                alt={user.lastName}
+                height={30}
+                width={30}
+              />
+            </span>
+            <span className="border flex px-1 rounded-sm dark:bg-slate-600  bg-yellow-50">
+              {user.firstName + " " + user.lastName}
+            </span>
           </span>
           <span className=" text-sm">
             {dateFormatter.format(Date.parse(createdAt))}

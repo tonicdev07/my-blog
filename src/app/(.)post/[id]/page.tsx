@@ -64,7 +64,6 @@ export default function Post() {
           >
             {loadingPage ? (
               <div className="min-h-screen lg:w-[800px] md:w-[500px] w-[200px] ">
-
                 <div className="max-w-4xl mx-auto px-4 py-8">
                   <div className="animate-pulse space-y-4">
                     <div className="h-4 bg-gray-300 rounded w-2/3"></div>
@@ -143,13 +142,13 @@ export default function Post() {
 
                 <div className=" ">
                   {post?.images?.map((i: any) => (
-                    <div key={i.id}>
+                    <div className="md:h-64 md:w-96 sm:w-56 sm:h-40 relative">
                       <Image
                         src={i.imageUrl}
-                        alt={i.id}
-                        className=" rounded-xl "
-                        height={200}
-                        width={200}
+                        alt="Picture of the author"
+                        layout="fill" // required
+                        objectFit="cover" // change to suit your needs
+                        className="rounded-xl" // just an example
                       />
                     </div>
                   ))}
