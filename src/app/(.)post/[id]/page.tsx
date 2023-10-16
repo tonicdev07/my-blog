@@ -143,7 +143,7 @@ export default function Post() {
 
                 <div className=" ">
                   {post?.images?.map((i: any) => (
-                    <div className="md:h-64 md:w-96 sm:w-56 sm:h-40 relative">
+                    <div key={i.imageKey} className="md:h-64 md:w-96 sm:w-56 sm:h-40 relative">
                       <Image
                         src={i.imageUrl}
                         alt="Picture of the author"
